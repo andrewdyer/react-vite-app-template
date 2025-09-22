@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import Home from './Home';
 
 const meta = {
-  title: 'Demo/Pages/Home',
+  title: 'Pages/Home',
   component: Home,
   parameters: {
     layout: 'fullscreen',
