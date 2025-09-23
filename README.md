@@ -40,32 +40,29 @@ The primary source code lives in the `src/` folder, organized into several key d
 
 ```plaintext
 src/
-├── app/                # Core App component and related files
-│   ├── App.tsx         # App component (sets up routing)
-│   ├── App.css         # App component styles
-│   ├── App.test.tsx    # App component tests
-│   └── index.ts        # App component exports
-│
-├── components/         # Reusable UI components (Button, Counter, etc.)
+├── layouts/
 │   └── ...
 │
-├── pages/              # Application pages (Home, etc.)
+├── pages/
 │   └── ...
 │
-├── utils/              # Utility functions and helpers
+├── utils/
 │   └── ...
 │
-├── index.css           # Global styles
-├── main.tsx            # Application entry point
-├── setupTests.ts       # Test setup file
-└── vite-env.d.ts       # Vite environment types
+├── App.tsx
+├── index.tsx
+├── index.css
+├── setupTests.ts
+└── vite-env.d.ts
 ```
 
-The application entry point is `main.tsx`, which renders the App component and serves as the central place to wrap it with global providers such as client-side routing, state management, or theming. This ensures that cross-cutting concerns are consistently applied across the entire app.
+The application entry point is `index.tsx`, which renders the `App` component and serves as the central place to wrap it with global providers such as client-side routing, state management, or theming. This way, those providers are available throughout the entire application.
 
-Within `src/`, the `app/` directory contains the core `App` component, responsible for setting up client-side routing and defining application pages. Reusable UI elements live in `components/`, while top-level views like Home are placed in `pages/`. General-purpose helpers and utilities are organized under `utils/`, and `index.css` defines global styles. This structure is meant as a starting point rather than a limitation — feel free to add or reorganize folders as needed. Its modular approach helps keep concerns encapsulated and makes the codebase easier to maintain and scale over time. Supporting files include `setupTests.ts`, which configures the testing environment, and `vite-env.d.ts`, which defines Vite environment types.
+The core `App` component sets up client-side routing and organizes application pages through layouts. Shared route-aware structures live in `layouts/`, while top-level views are placed in `pages/`. General-purpose helpers reside in `utils/`, and global styles are defined in `index.css`. Supporting files include `setupTests.ts`, which configures the testing environment, and `vite-env.d.ts`, which defines Vite environment types.
 
-To simplify imports and keep the codebase organized, path aliases are configured in `vite.config.ts`, `tsconfig.app.json`, and `vitest.config.ts`. By default, the `@` alias points to the `src/` directory, allowing clean imports. This approach keeps imports consistent and scalable as the project grows.
+This structure is a starting point that can be extended as the project grows — for example, reusable UI elements could be grouped into a `components/` folder, API logic centralized in a `services/` folder, or application state kept in a `store/` folder. Its modular approach keeps concerns encapsulated and makes the codebase easier to maintain and scale over time.
+
+To simplify imports and keep the codebase organized, path aliases are configured in `vite.config.ts` and `tsconfig.app.json`. By default, the `@` alias points to the `src/` directory, allowing clean, consistent imports as the project grows.
 
 ## 🚀 Getting Started
 
