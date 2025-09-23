@@ -4,17 +4,17 @@ FROM node:22.12 as build
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and yarn.lock to the working directory
-COPY package.json yarn.lock ./
+# Copy package.json and package-lock.json to the working directory
+COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN yarn install
+RUN npm install
 
 # Copy the entire application code to the container
 COPY . .
 
 # Build the React app for production
-RUN yarn build
+RUN npm run build
 
 # Use Nginx as the production server
 FROM nginx:alpine

@@ -1,4 +1,4 @@
-yarn lint && \
-yarn format && \
-yarn type-check && \
-yarn test:coverage
+npm run lint && \
+npm run format && \
+npm run type-check && \
+npm run test:coverage
