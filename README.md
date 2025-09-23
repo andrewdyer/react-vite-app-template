@@ -40,6 +40,9 @@ The primary source code lives in the `src/` folder, organized into several key d
 
 ```plaintext
 src/
+├── assets/
+│   └── ...
+│
 ├── layouts/
 │   └── ...
 │
@@ -58,7 +61,7 @@ src/
 
 The application entry point is `index.tsx`, which renders the `App` component and serves as the central place to wrap it with global providers such as client-side routing, state management, or theming. This way, those providers are available throughout the entire application.
 
-The core `App` component sets up client-side routing and organizes application pages through layouts. Shared route-aware structures live in `layouts/`, while top-level views are placed in `pages/`. General-purpose helpers reside in `utils/`, and global styles are defined in `index.css`. Supporting files include `setupTests.ts`, which configures the testing environment, and `vite-env.d.ts`, which defines Vite environment types.
+The core `App.tsx` component sets up client-side routing and organizes application pages through layouts. Shared route-aware structures live in `layouts/`, while top-level views are placed in `pages/`. General-purpose helpers reside in `utils/`, global styles are defined in `index.css`, and static assets such as images and icons are stored in `assets/`. Supporting files include `setupTests.ts`, which configures the testing environment, and `vite-env.d.ts`, which defines Vite environment types.
 
 This structure is a starting point that can be extended as the project grows — for example, reusable UI elements could be grouped into a `components/` folder, API logic centralized in a `services/` folder, or application state kept in a `store/` folder. Its modular approach keeps concerns encapsulated and makes the codebase easier to maintain and scale over time.
 
