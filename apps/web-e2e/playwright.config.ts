@@ -7,7 +7,7 @@ const devServerURL: string = 'http://localhost:5173';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './e2e',
+  testDir: './src',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -56,10 +56,10 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run start',
-    url: devServerURL,
-    reuseExistingServer: !process.env.CI,
-  },
+  // /* Run your local dev server before starting the tests */
+  // webServer: {
+  //   command: 'npm run start',
+  //   url: devServerURL,
+  //   reuseExistingServer: !process.env.CI,
+  // },
 });
