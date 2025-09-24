@@ -1,7 +1,5 @@
 import type { ReactElement } from 'react';
-
 import { render, RenderOptions } from '@testing-library/react';
-
 import { MemoryRouter } from 'react-router-dom';
 
 type ProviderOptions = {
