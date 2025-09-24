@@ -28,6 +28,9 @@ dist-ssr
 # Coverage directory
 coverage
 
+# Turbo
+.turbo
+
 # Playwright
 /test-results/
 /playwright-report/
