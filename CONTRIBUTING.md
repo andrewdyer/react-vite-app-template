@@ -21,19 +21,19 @@ To get started with contributing, set up the project by following these steps:
 2. Use the correct Node.js version specified in [.nvmrc](.nvmrc):
    - Install `nvm` if you haven't already. Follow the instructions on the [nvm GitHub repository](https://github.com/nvm-sh/nvm).
    - Run `nvm use` to switch to the required Node.js version.
-3. Install all project dependencies to ensure a complete setup with `npm install`.
-4. Start the development server using `npm run start` to begin working on the project.
-5. Start Storybook using `npm run start:storybook` to develop and test UI components in isolation.
-6. Run tests with `npm test` to verify that the environment is working correctly. You can also use `npm run test:watch` to run the tests in watch mode, `npm run test:coverage` to generate a coverage report, and `npm run test:ui` to run the tests with the Vitest UI.
+3. Install all project dependencies to ensure a complete setup with `pnpm install`.
+4. Start the development server using `pnpm start` to begin working on the project.
+5. Start Storybook using `pnpm start:storybook` to develop and test UI components in isolation.
+6. Run tests with `pnpm test` to verify that the environment is working correctly. You can also use `pnpm test:watch` to run the tests in watch mode, `pnpm test:coverage` to generate a coverage report, and `pnpm test:ui` to run the tests with the Vitest UI.
 
 ## Upgrading Dependencies
 
 Keeping dependencies up-to-date is crucial for maintaining the security and performance of the project. Follow these steps to upgrade dependencies:
 
-1. Check for outdated dependencies with `npm outdated`.
-2. Update dependencies using `npm upgrade` or update a specific package with `npm install <package-name>@latest`.
-3. Ensure everything works after the upgrade by running the tests with `npm test`.
-4. Make sure the `package-lock.json` file is updated with the latest dependency versions by running `npm install`.
+1. Check for outdated dependencies with `pnpm outdated`.
+2. Update dependencies using `pnpm up` or update a specific package with `pnpm add <package-name>@latest`.
+3. Ensure everything works after the upgrade by running the tests with `pnpm test`.
+4. Make sure the `pnpm-lock.yaml` file is updated with the latest dependency versions by running `pnpm install`.
 5. Commit the changes to the repository with a clear commit message.
 6. Push the changes to your branch and create a pull request for review.
 
@@ -41,7 +41,7 @@ Keeping dependencies up-to-date is crucial for maintaining the security and perf
 
 To maintain code quality and consistency, please follow these guidelines:
 
-- Run `npm run format` to format code using Prettier and `npm run lint` for linting with ESLint.
+- Run `pnpm format` to format code using Prettier and `pnpm lint` for linting with ESLint.
 - Organize imports into clearly separated groups, following this order: React imports, third-party packages, app-level aliases, and local imports.
 - Arrange imports alphabetically by package name within each group to improve readability.
 
@@ -56,16 +56,16 @@ Please write tests for any new features or modifications to the project. Follow 
 ### Unit & Component Tests
 
 - Use the `.test.ts(x)` naming convention for unit and component tests.
-- Run tests with `npm test`.
-- Check code coverage using `npm run test:coverage`.
-- For an interactive experience, launch Vitest UI via `npm run test:ui`.
+- Run tests with `pnpm test`.
+- Check code coverage using `pnpm test:coverage`.
+- For an interactive experience, launch Vitest UI via `pnpm test:ui`.
 - Ensure that code coverage meets the following thresholds: **Lines**, **Functions**, **Branches**, and **Statements** all at 90%.
 
 ### End-to-End (E2E) Tests
 
 - Use the `.spec.ts(x)` naming convention for E2E tests.
-- Run E2E tests using `npm run test:e2e`.
-- For debugging or exploring flows, use Playwright UI via `npm run test:e2e:ui`.
+- Run E2E tests using `pnpm test:e2e`.
+- For debugging or exploring flows, use Playwright UI via `pnpm test:e2e:ui`.
 
 ### Testing Guidelines
 
@@ -83,9 +83,9 @@ Before submitting changes, ensure **all tests pass** and coverage is maintained.
 
 Use the following commands as needed to build and preview the project:
 
-- Build the project for production using TypeScript and Vite with `npm run build`.
-- Generate a static Storybook build with `npm run build:storybook`.
-- Preview the production build locally using Vite with `npm run preview`.
+- Build the project for production using TypeScript and Vite with `pnpm build`.
+- Generate a static Storybook build with `pnpm build:storybook`.
+- Preview the production build locally using Vite with `pnpm preview`.
 
 ## Dockerizing
 
