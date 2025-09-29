@@ -18,7 +18,31 @@ export default [
     },
     rules: {
       'turbo/no-undeclared-env-vars': 'warn',
-      'import/order': ['warn', { 'newlines-between': 'always' }],
+      'import/order': [
+        'warn',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            ['parent', 'sibling', 'index'],
+          ],
+          'newlines-between': 'always',
+          pathGroups: [
+            {
+              pattern: '@repo/**',
+              group: 'internal',
+              position: 'after',
+            },
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'after',
+            },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+        },
+      ],
     },
   },
   {
