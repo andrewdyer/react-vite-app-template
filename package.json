@@ -2,12 +2,13 @@
   "name": "vite-react-app-template",
   "private": true,
   "scripts": {
-    "format": "turbo run format",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "type-check": "turbo run type-check"
   },
   "devDependencies": {
+    "prettier": "^3.4.2",
     "turbo": "^2.5.6",
     "typescript": "^5.9.2"
   },

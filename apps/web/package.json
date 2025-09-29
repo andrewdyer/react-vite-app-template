@@ -8,7 +8,6 @@
     "build:storybook": "storybook build",
     "lint": "eslint .",
     "prepare": "husky",
-    "format": "prettier --ignore-unknown --write .",
     "preview": "vite preview",
     "start": "vite",
     "start:storybook": "storybook dev -p 6006",
@@ -44,14 +43,10 @@
     "eslint": "^9.15.0",
     "husky": "^9.1.7",
     "jsdom": "^25.0.1",
-    "prettier": "^3.4.2",
     "storybook": "^9.0.8",
     "typescript": "^5.9.2",
     "vite": "^7.1.6",
     "vite-plugin-pwa": "^1.0.3",
     "vitest": "^3.2.4"
-  },
-  "lint-staged": {
-    "*": "prettier --ignore-unknown --write"
   }
 }
