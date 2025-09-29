@@ -4,6 +4,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "noEmit": true,
     "target": "ES2020",
     "useDefineForClassFields": true,
   }
