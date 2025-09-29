@@ -1,11 +1,11 @@
-import base from "./base.js";
-import playwright from "eslint-plugin-playwright";
+import base from './base.js';
+import playwright from 'eslint-plugin-playwright';
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
   ...base,
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       playwright,
     },
