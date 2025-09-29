@@ -7,8 +7,5 @@
     "src/**/*.test.ts",
     "src/**/*.d.ts"
   ],
-  "exclude": [
-    "playwright-report",
-    "test-results"
-  ]
+  "exclude": ["playwright-report", "test-results"]
 }
