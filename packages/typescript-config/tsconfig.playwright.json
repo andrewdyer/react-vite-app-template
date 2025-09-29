@@ -14,6 +14,10 @@
     // Enough for Node 16+/18+ environments (Playwright runs in Node).
     "lib": ["ES2022"],
 
+    // Do not emit compiled JS files.
+    // For apps, bundlers like Vite handle output — TypeScript just type-checks.
+    "noEmit": true,
+
     // Require the explicit "override" keyword when overriding base class methods.
     // Helps prevent accidental shadowing of methods.
     "noImplicitOverride": true,
