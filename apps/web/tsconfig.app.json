@@ -1,12 +1,26 @@
 {
+  // Extend the shared Vite app config (React + DOM + noEmit)
   "extends": "@repo/typescript-config/tsconfig.vite.json",
   "compilerOptions": {
+    // Base directory for resolving non-relative imports.
+    // Allows path mapping like "@/components/Button".
     "baseUrl": "./",
+
+    // Path alias: maps `@/foo` → `src/foo`.
+    // Makes imports cleaner and avoids long relative paths.
     "paths": {
       "@/*": ["src/*"]
     },
+
+    // Where TypeScript stores incremental build info for this config.
+    // Keeps build caches inside node_modules (avoids polluting repo root).
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    // Extra type definitions to include globally:
+    // - vitest/globals → lets you use `describe`, `it`, `expect` without imports.
+    // - @testing-library/jest-dom → adds custom matchers like `toBeInTheDocument`.
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
+  // Only include the app source directory.
   "include": ["src"]
 }

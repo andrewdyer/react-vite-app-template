@@ -1,20 +1,62 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    // Allow importing TypeScript files with explicit .ts/.tsx extensions
+    // e.g. `import {x} from "./foo.ts"`. Normally discouraged, but useful in monorepos.
     "allowImportingTsExtensions": true,
+
+    // Make sure imports respect the exact casing of filenames
+    // Helps avoid issues on case-sensitive file systems (e.g. Linux CI).
     "forceConsistentCasingInFileNames": true,
+
+    // Treat each file as its own module, even if it has no imports/exports.
+    // Required by tools like Babel and Vite to transform files independently.
     "isolatedModules": true,
+
+    // The module system to emit. ESNext = native JavaScript modules (import/export).
+    // Best choice for modern bundlers (Vite, Webpack, Rollup).
     "module": "ESNext",
+
+    // How TS decides whether a file is a module vs. script.
+    // `force` means files are always treated as modules unless marked otherwise.
     "moduleDetection": "force",
+
+    // Module resolution strategy.
+    // `bundler` mimics how modern bundlers resolve imports (supports exports maps in package.json).
+    // Use this with Vite/modern ESM projects.
     "moduleResolution": "bundler",
+
+    // Error if a switch/case falls through without `break`.
+    // Helps prevent common logic bugs.
     "noFallthroughCasesInSwitch": true,
+
+    // Warn if you import a module only for its side effects, without using any exports.
+    // Encourages more explicit and safer import patterns.
     "noUncheckedSideEffectImports": true,
+
+    // Report variables that are declared but never used.
+    // Keeps code clean and avoids dead code.
     "noUnusedLocals": true,
+
+    // Report function parameters that are never used.
+    // Useful for catching mistakes or cleaning up APIs.
     "noUnusedParameters": true,
+
+    // Skip type-checking inside .d.ts files (e.g. dependencies in node_modules).
+    // Speeds up builds, safe in practice.
     "skipLibCheck": true,
-    "strict": true,
+
+    // Enable all strict type-checking features:
+    // - noImplicitAny
+    // - strictNullChecks
+    // - strictFunctionTypes
+    // - strictBindCallApply
+    // - strictPropertyInitialization
+    // This is the "maximum safety" setting.
+    "strict": true
   },
   "exclude": [
+    // Don’t try to compile dependencies
     "node_modules"
   ]
 }

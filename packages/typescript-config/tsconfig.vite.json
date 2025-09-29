@@ -2,10 +2,25 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    // Enable the modern JSX transform introduced in React 17+.
+    // Avoids needing to import React in every file just for JSX.
     "jsx": "react-jsx",
+
+    // Standard library files to include when type-checking:
+    // - ES2020 (modern JS features like async/await, BigInt)
+    // - DOM + DOM.Iterable (browser APIs, iterable collections).
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    // Do not emit compiled JS files.
+    // For apps, bundlers like Vite handle output — TypeScript just type-checks.
     "noEmit": true,
+
+    // Specify which JS language features TS should compile down to.
+    // ES2020 ensures compatibility with modern browsers.
     "target": "ES2020",
-    "useDefineForClassFields": true,
+
+    // Use ECMAScript semantics for class fields.
+    // Matches modern JS spec (ES2022+), avoids legacy TS behavior.
+    "useDefineForClassFields": true
   }
 }

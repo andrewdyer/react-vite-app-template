@@ -2,10 +2,24 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    // Add "development" as a custom condition for module resolution.
+    // Useful when using "exports" fields in package.json that vary by environment.
     "customConditions": ["development"],
+
+    // Specify JS language features to target.
+    // ES2022 includes class fields, top-level await, etc.
     "target": "ES2022",
+
+    // Include only ES2022 standard library definitions.
+    // Enough for Node 16+/18+ environments (Playwright runs in Node).
     "lib": ["ES2022"],
+
+    // Require the explicit "override" keyword when overriding base class methods.
+    // Helps prevent accidental shadowing of methods.
     "noImplicitOverride": true,
+
+    // Require all code paths in functions to return a value.
+    // Helps avoid accidental "undefined" returns.
     "noImplicitReturns": true
   }
 }

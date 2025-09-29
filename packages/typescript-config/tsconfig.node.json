@@ -2,8 +2,17 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    // Include only the ES2023 library definitions.
+    // Gives access to the latest Node-compatible JS features.
     "lib": ["ES2023"],
+
+    // Do not emit compiled JS files.
+    // For Node apps, TS is typically used only for type-checking —
+    // runtime code is executed with tsx, ts-node, or compiled separately.
     "noEmit": true,
+
+    // Output code compatible with ES2022.
+    // Matches current Node.js LTS baseline features.
     "target": "ES2022"
   }
 }

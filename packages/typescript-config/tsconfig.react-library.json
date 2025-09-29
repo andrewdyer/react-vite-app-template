@@ -2,11 +2,27 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    // Generate .d.ts type declaration files for consumers of the library.
     "declaration": true,
+
+    // Emit only declaration files, not JS.
+    // Bundler (Vite/Rollup) will handle the actual JS output.
     "emitDeclarationOnly": true,
+
+    // Enable the modern JSX transform for React 17+.
     "jsx": "react-jsx",
+
+    // Standard library files to include when type-checking:
+    // - DOM + DOM.Iterable (browser APIs)
+    // - ESNext (latest JS features, since libs should support modern tooling).
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    // Allow TypeScript to emit files (needed for declarations).
+    // This overrides "noEmit: true" from base.
     "noEmit": false,
+
+    // Specify latest JS output target (ESNext).
+    // Lets bundlers optimize for multiple formats (CJS, ESM, UMD).
     "target": "ESNext"
   }
 }

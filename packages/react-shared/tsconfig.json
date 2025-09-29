@@ -1,0 +1,21 @@
+{
+  // Extend the shared React library config (declarations, ESNext, JSX)
+  "extends": "@repo/typescript-config/tsconfig.react-library.json",
+  "compilerOptions": {
+    // Where TypeScript stores incremental build info for this package.
+    // Helps speed up builds when using project references.
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
+
+    // Where to write generated .d.ts declaration files.
+    "declarationDir": "./dist",
+
+    // Where to write compiled outputs (if emit were enabled).
+    // Vite will also write here, so both JS and .d.ts end up in /dist.
+    "outDir": "./dist"
+  },
+  // Only include this library’s source.
+  "include": ["src"],
+
+  // Exclude dependencies and build outputs from type-checking.
+  "exclude": ["node_modules", "dist"]
+}
