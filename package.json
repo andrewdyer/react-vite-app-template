@@ -8,6 +8,7 @@
     "type-check": "turbo run type-check"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "prettier": "^3.4.2",
     "turbo": "^2.5.6",
     "typescript": "^5.9.2"
