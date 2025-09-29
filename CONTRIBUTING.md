@@ -22,7 +22,7 @@ To get started with contributing, set up the project by following these steps:
    - Install `nvm` if you haven't already. Follow the instructions on the [nvm GitHub repository](https://github.com/nvm-sh/nvm).
    - Run `nvm use` to switch to the required Node.js version.
 3. Install all project dependencies to ensure a complete setup with `pnpm install`.
-4. Start the development server using `pnpm start` to begin working on the project.
+4. Start the development server using `pnpm dev` to begin working on the project.
 5. Start Storybook using `pnpm start:storybook` to develop and test UI components in isolation.
 6. Run tests with `pnpm test` to verify that the environment is working correctly. You can also use `pnpm test:watch` to run the tests in watch mode, `pnpm test:coverage` to generate a coverage report, and `pnpm test:ui` to run the tests with the Vitest UI.
 

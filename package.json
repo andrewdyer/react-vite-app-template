@@ -2,6 +2,7 @@
   "name": "vite-react-app-template",
   "private": true,
   "scripts": {
+    "dev": "turbo run dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "test": "turbo run test",
