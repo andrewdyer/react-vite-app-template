@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '@repo/react-shared';
 
 import reactLogo from '@/assets/react.svg';
 import viteLogo from '@/assets/vite.svg';
@@ -19,9 +20,9 @@ const Home = () => {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
