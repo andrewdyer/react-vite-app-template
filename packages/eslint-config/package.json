@@ -5,8 +5,8 @@
   "private": true,
   "exports": {
     "./base": "./src/base.js",
-    "./react-app": "./src/react-app.js",
-    "./playwright": "./src/playwright.js"
+    "./playwright": "./src/playwright.js",
+    "./react": "./src/react.js"
   },
   "dependencies": {
     "@eslint/js": "^9.34.0",
