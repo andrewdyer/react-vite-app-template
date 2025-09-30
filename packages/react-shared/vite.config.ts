@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
@@ -19,6 +20,16 @@ export default defineConfig({
           'react-dom': 'ReactDOM',
         },
       },
+    },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['src/setupTests.ts'],
+    include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    coverage: {
+      reportsDirectory: 'coverage',
+      provider: 'v8',
     },
   },
 });

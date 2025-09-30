@@ -11,7 +11,12 @@
 
     // Where to write compiled outputs (if emit were enabled).
     // Vite will also write here, so both JS and .d.ts end up in /dist.
-    "outDir": "./dist"
+    "outDir": "./dist",
+
+    // Extra type definitions to include globally:
+    // - vitest/globals → lets you use `describe`, `it`, `expect` without imports.
+    // - @testing-library/jest-dom → adds custom matchers like `toBeInTheDocument`.
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   // Only include this library’s source.
   "include": ["src"],
