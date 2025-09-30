@@ -2,7 +2,7 @@
 
 # Vite + React App Template
 
-A template for building frontend applications using [Vite](https://vitejs.dev/) and [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/).
+A Turborepo-based template for building modern frontend applications using [Vite](https://vitejs.dev/), [React](https://react.dev/), and [TypeScript](https://www.typescriptlang.org/).
 
 ## ⚖️ License
 
