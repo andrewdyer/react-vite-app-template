@@ -14,10 +14,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Vite React App Template',
-        short_name: 'VRA Template',
-        description:
-          'A template for building frontend applications using Vite and React with TypeScript.',
+        name: 'Web App',
+        short_name: 'WebApp',
         theme_color: '#ffffff',
         icons: [
           {
