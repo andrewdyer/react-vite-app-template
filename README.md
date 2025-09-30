@@ -10,7 +10,7 @@ Licensed under the [MIT license](https://opensource.org/licenses/MIT) and is fre
 
 ## ✨ Introduction
 
-This template enhances the official Vite template for React with TypeScript and SWC (Speedy Web Compiler) by integrating additional tools and configurations, while implementing an architecture that focuses on clarity, modularity, and maintainability. It serves the purpose of providing a solid foundation to help you hit the ground running and save valuable time when starting a new project.
+This project is a Turborepo-based monorepo template for building scalable frontend applications. It provides a modular workspace with centralized tooling and configurations, allowing multiple apps and packages to live together in a single repository. It serves the purpose of providing a solid foundation to help you hit the ground running and save valuable time when starting a new project.
 
 ## 📋 Prerequisites
 
