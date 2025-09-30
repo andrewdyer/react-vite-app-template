@@ -1,8 +1,8 @@
-![Vite + React App Template](https://raw.githubusercontent.com/andrewdyer/public-assets/refs/heads/main/images/covers/vite-react-app-template.png)
+![React + Vite + Turborepo Template](https://raw.githubusercontent.com/andrewdyer/public-assets/refs/heads/main/images/covers/react-vite-turborepo-template.png)
 
-# Vite + React App Template
+# React + Vite + Turborepo Template
 
-A Turborepo-based template for building modern frontend applications using [Vite](https://vitejs.dev/), [React](https://react.dev/), and [TypeScript](https://www.typescriptlang.org/).
+A Turborepo-based template for building modern frontend applications using the [React](https://react.dev/) framework, the [Vite](https://vitejs.dev/) build tool, and the [TypeScript](https://www.typescriptlang.org/) language.
 
 ## ⚖️ License
 
@@ -20,52 +20,43 @@ Before you begin, ensure you have met the following requirements:
 - **[pnpm](https://pnpm.io/)**: Dependency management tool for Node.js.
 - **[Docker](https://www.docker.com/)** (optional): For containerizing the application.
 
-## 🛠️ Features
+## 🏗️ Workspace
 
-This template includes the following additional tools and configurations:
+This section provides an overview of the apps and packages included in the monorepo, along with their purpose and key tooling.
 
-- [Vitest](https://vitest.dev/) for unit testing, along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing React components, Vitest UI, and coverage reports.
-- [Playwright](https://playwright.dev/) for end-to-end testing with UI and coverage support.
-- [Storybook](https://storybook.js.org/) for building and testing UI components in isolation.
-- [React Router](https://reactrouter.com/) for client-side routing.
-- [Vite PWA](https://vite-pwa-org.netlify.app/) (Progressive Web App) support for offline capabilities and better performance on mobile devices.
-- [Prettier](https://prettier.io/) for consistent code formatting across the codebase.
-- [Husky](https://typicode.github.io/husky/#/) for Git hooks to automate tasks such as linting, formatting, type-checking, and testing before commits.
-- CI (Continuous Integration) setup with [GitHub Actions](https://github.com/features/actions) for automated testing, building, and type-checking.
-- [Docker](https://www.docker.com/) support for containerizing the application.
+### ⚛️ apps/web
 
-🏗️ Architecture
+A React application that enhances the official Vite template for React with TypeScript and SWC (Speedy Web Compiler). It integrates additional tools and configurations while implementing an architecture that emphasizes clarity, modularity, and maintainability.
 
-The primary source code lives in the `src/` folder, organized into several key directories:
+- [React Router](https://reactrouter.com/) for client-side routing
+- [Vite PWA](https://vite-pwa-org.netlify.app/) for offline and mobile performance
+- [Storybook](https://storybook.js.org/) for UI component development
+- [Vitest](https://vitest.dev/) for unit/component testing (with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/), [Vitest UI](https://vitest.dev/guide/ui.html), [coverage reports](https://vitest.dev/guide/coverage.html))
+- Centralized [ESLint](https://eslint.org/) and [TypeScript](https://www.typescriptlang.org/) configs
 
-```plaintext
-src/
-├── assets/
-│   └── ...
-│
-├── layouts/
-│   └── ...
-│
-├── pages/
-│   └── ...
-│
-├── utils/
-│   └── ...
-│
-├── App.tsx
-├── index.tsx
-├── index.css
-├── setupTests.ts
-└── vite-env.d.ts
-```
+### 🎭 apps/web-e2e
 
-The application entry point is `index.tsx`, which renders the `App` component and serves as the central place to wrap it with global providers such as client-side routing, state management, or theming. This way, those providers are available throughout the entire application.
+An end-to-end testing suite that validates real user flows and ensures the web application behaves as expected. It is designed to catch integration issues early and provide confidence in deployment.
 
-The core `App.tsx` component sets up client-side routing and organizes application pages through layouts. Shared route-aware structures live in `layouts/`, while top-level views are placed in `pages/`. General-purpose helpers reside in `utils/`, global styles are defined in `index.css`, and static assets such as images and icons are stored in `assets/`. Supporting files include `setupTests.ts`, which configures the testing environment, and `vite-env.d.ts`, which defines Vite environment types.
+- [Playwright](https://playwright.dev/) for browser automation and testing (with [UI](https://playwright.dev/docs/test-ui-mode) and [coverage support](https://playwright.dev/docs/test-coverage))
+- Centralized [ESLint](https://eslint.org/) and [TypeScript](https://www.typescriptlang.org/) configs
 
-This structure is a starting point that can be extended as the project grows — for example, reusable UI elements could be grouped into a `components/` folder, API logic centralized in a `services/` folder, or application state kept in a `store/` folder. Its modular approach keeps concerns encapsulated and makes the codebase easier to maintain and scale over time.
+### 📦 packages/react-shared
 
-To simplify imports and keep the codebase organized, path aliases are configured in `vite.config.ts` and `tsconfig.app.json`. By default, the `@` alias points to the `src/` directory, allowing clean, consistent imports as the project grows.
+A shared React component library that promotes reuse across multiple applications in the workspace. It enables teams to build, document, and test UI components in isolation before integrating them into apps.
+
+- [Vitest](https://vitest.dev/) for unit/component testing
+- [Storybook](https://storybook.js.org/) for isolated component development
+- Centralized [ESLint](https://eslint.org/) and [TypeScript](https://www.typescriptlang.org/) configs
+
+## 🧰 Tooling
+
+- Prettier for consistent code formatting
+- Husky for Git hooks (linting, formatting, type-checking, testing before commits)
+- CI setup with GitHub Actions (automated testing, building, type-checking)
+- Docker support for containerization
+- Workspace-based monorepo (Turborepo)
+- Centralized ESLint and TypeScript configurations
 
 ## 🚀 Getting Started
 

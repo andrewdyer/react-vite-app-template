@@ -1,5 +1,5 @@
 {
-  "name": "vite-react-app-template",
+  "name": "react-vite-turborepo-template",
   "private": true,
   "type": "module",
   "scripts": {
