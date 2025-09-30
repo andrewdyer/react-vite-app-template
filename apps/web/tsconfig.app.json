@@ -1,6 +1,6 @@
 {
   // Extend the shared Vite app config (React + DOM + noEmit)
-  "extends": "@repo/typescript-config/tsconfig.vite.json",
+  "extends": "@repo/typescript-config/tsconfig.react-app.json",
   "compilerOptions": {
     // Base directory for resolving non-relative imports.
     // Allows path mapping like "@/components/Button".
