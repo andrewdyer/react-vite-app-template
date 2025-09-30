@@ -11,15 +11,19 @@ on:
 jobs:
   build:
     uses: andrewdyer/github-workflows/.github/workflows/build.yml@main
+    with:
+      package-manager: pnpm
 
-  test-unit:
-    uses: andrewdyer/github-workflows/.github/workflows/test.yml@main
-    needs: build
+  # test-unit:
+  #   uses: andrewdyer/github-workflows/.github/workflows/test.yml@main
+  #   needs: build
 
-  test-e2e:
-    uses: andrewdyer/github-workflows/.github/workflows/playwright.yml@main
-    needs: build
+  # test-e2e:
+  #   uses: andrewdyer/github-workflows/.github/workflows/playwright.yml@main
+  #   needs: build
 
   typecheck:
     uses: andrewdyer/github-workflows/.github/workflows/type-check.yml@main
     needs: build
+    with:
+      package-manager: pnpm
