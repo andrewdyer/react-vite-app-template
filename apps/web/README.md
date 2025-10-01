@@ -1,6 +1,6 @@
 # ⚛️ web
 
-This template is created with `pnpm create vite` and enhances [the official Vite template](https://vitejs.dev/) for React with TypeScript.
+This project was created with `pnpm create vite` and enhances [the official Vite template](https://vitejs.dev/) for React with TypeScript with additional tools and configurations.
 
 ## 📜 Available Scripts
 
