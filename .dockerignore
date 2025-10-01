@@ -1,24 +1,31 @@
-# Ignore node_modules
+# Node
 node_modules
+**/node_modules
 
-# Ignore logs
+# Logs
 *.log
 
-# Ignore build output
+# Build output (Vite)
 dist
+**/dist
 
-# Ignore local environment files
+# Turborepo cache
+.turbo
+**/.turbo
+
+# Environment files
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Ignore Git files
+# Git
 .git
 .gitignore
 
-# Ignore IDE/editor config files
+# Editor/IDE
 .vscode
 .idea
 *.swp
+.DS_Store
