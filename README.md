@@ -30,7 +30,6 @@ A React application that enhances the official Vite template for React with Type
 
 - [React Router](https://reactrouter.com/) for client-side routing
 - [Vite PWA](https://vite-pwa-org.netlify.app/) for offline and mobile performance
-- [Storybook](https://storybook.js.org/) for UI component development
 - [Vitest](https://vitest.dev/) for unit/component testing (with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/), [Vitest UI](https://vitest.dev/guide/ui.html), [coverage reports](https://vitest.dev/guide/coverage.html))
 - Centralized [ESLint](https://eslint.org/) and [TypeScript](https://www.typescriptlang.org/) configs
 
@@ -46,7 +45,6 @@ An end-to-end testing suite that validates real user flows and ensures the web a
 A shared React component library that promotes reuse across multiple applications in the workspace. It enables teams to build, document, and test UI components in isolation before integrating them into apps.
 
 - [Vitest](https://vitest.dev/) for unit/component testing
-- [Storybook](https://storybook.js.org/) for isolated component development
 - Centralized [ESLint](https://eslint.org/) and [TypeScript](https://www.typescriptlang.org/) configs
 
 ## 🧰 Tooling
@@ -64,4 +62,4 @@ If you like what you've seen so far and think this setup fits your needs, you ca
 
 ## 🤝 Contributing
 
-Before contributing to this project, please refer to the [contributing](./CONTRIBUTING.md) documentation for a more in-depth setup guide, including details on running tests, Storybook, coding standards, and the pull request process.
+Before contributing to this project, please refer to the [contributing](./CONTRIBUTING.md) documentation for a more in-depth setup guide, including details on running tests, coding standards, and the pull request process.

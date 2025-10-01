@@ -22,8 +22,7 @@ To get started with contributing, set up the project by following these steps:
    - Run `nvm use` to switch to the required Node.js version.
 3. Install all project dependencies to ensure a complete setup with `pnpm install`.
 4. Start the development server using `pnpm dev` to begin working on the project.
-5. Start Storybook using `pnpm start:storybook` to develop and test UI components in isolation.
-6. Run tests with `pnpm test` to verify that the environment is working correctly. You can also use `pnpm test:watch` to run the tests in watch mode, `pnpm test:coverage` to generate a coverage report, and `pnpm test:ui` to run the tests with the Vitest UI.
+5. Run tests with `pnpm test` to verify that the environment is working correctly. You can also use `pnpm test:watch` to run the tests in watch mode, `pnpm test:coverage` to generate a coverage report, and `pnpm test:ui` to run the tests with the Vitest UI.
 
 ## Upgrading Dependencies
 
@@ -84,7 +83,6 @@ Before submitting changes, ensure **all tests pass** and coverage is maintained.
 Use the following commands as needed to build and preview the project:
 
 - Build the project for production using TypeScript and Vite with `pnpm build`.
-- Generate a static Storybook build with `pnpm build:storybook`.
 - Preview the production build locally using Vite with `pnpm preview`.
 
 ## Submitting Changes
