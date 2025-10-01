@@ -17,9 +17,10 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
     // Extra type definitions to include globally:
+    // - vite/client → for Vite-specific types like `import.meta.env`.
     // - vitest/globals → lets you use `describe`, `it`, `expect` without imports.
     // - @testing-library/jest-dom → adds custom matchers like `toBeInTheDocument`.
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },
   // Only include the app source directory.
   "include": ["src"]
