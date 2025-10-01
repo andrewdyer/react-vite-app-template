@@ -28,7 +28,6 @@ This section provides an overview of the apps and packages included in the monor
 
 A React application that enhances the official Vite template for React with TypeScript and SWC (Speedy Web Compiler). It integrates additional tools and configurations while implementing an architecture that emphasizes clarity, modularity, and maintainability.
 
-- [React Router](https://reactrouter.com/) for client-side routing
 - [Vite PWA](https://vite-pwa-org.netlify.app/) for offline and mobile performance
 - [Vitest](https://vitest.dev/) for unit/component testing (with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/), [Vitest UI](https://vitest.dev/guide/ui.html), [coverage reports](https://vitest.dev/guide/coverage.html))
 - Centralized [ESLint](https://eslint.org/) and [TypeScript](https://www.typescriptlang.org/) configs

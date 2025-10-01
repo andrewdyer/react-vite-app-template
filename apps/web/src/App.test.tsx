@@ -1,34 +1,38 @@
-import { screen } from '@testing-library/react';
-import { Outlet } from 'react-router-dom';
-
-import { renderWithProviders } from '@/utils/testing';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import App from './App';
 
-vi.mock('@/layouts', async () => ({
-  MainLayout: () => (
-    <div data-testid="main-layout">
-      <Outlet />
-    </div>
-  ),
-}));
-
-vi.mock('@/pages', async () => ({
-  Home: () => <div data-testid="home-page">Home Page</div>,
-}));
-
 describe('App', () => {
-  it('should render the MainLayout component when navigating to the root path', () => {
-    renderWithProviders(<App />, { initialEntries: ['/'] });
+  it('should have a Vite logo link with correct href and target', () => {
+    render(<App />);
 
-    const mainLayout = screen.getByTestId('main-layout');
-    expect(mainLayout).toBeInTheDocument();
+    const viteLink = screen.getByRole('link', { name: /vite logo/i });
+    expect(viteLink).toHaveAttribute('href', 'https://vite.dev');
+    expect(viteLink).toHaveAttribute('target', '_blank');
   });
 
-  it('should render the Home component when navigating to the root path', () => {
-    renderWithProviders(<App />, { initialEntries: ['/'] });
+  it('should have a React logo link with correct href and target', () => {
+    render(<App />);
 
-    const Home = screen.getByTestId('home-page');
-    expect(Home).toBeInTheDocument();
+    const reactLink = screen.getByRole('link', { name: /react logo/i });
+    expect(reactLink).toHaveAttribute('href', 'https://react.dev');
+    expect(reactLink).toHaveAttribute('target', '_blank');
+  });
+
+  it('should increment the counter when the button is clicked', () => {
+    render(<App />);
+
+    expect(screen.getByText('count is 0')).toBeInTheDocument();
+
+    const button = screen.getByText(/count is \d/);
+
+    fireEvent.click(button);
+    expect(screen.getByText('count is 1')).toBeInTheDocument();
+
+    fireEvent.click(button);
+    expect(screen.getByText('count is 2')).toBeInTheDocument();
+
+    fireEvent.click(button);
+    expect(screen.getByText('count is 3')).toBeInTheDocument();
   });
 });
