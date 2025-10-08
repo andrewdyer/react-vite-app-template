@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "vite-react-app-template",
+  "name": "react-vite-app-template",
   "description": "A template for building frontend applications using Vite and React with TypeScript",
   "author": "Andrew Dyer <andrew@dyermail.com>",
   "version": "0.0.0",

@@ -2,7 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 
 class Home {
   readonly page: Page;
-  readonly title = 'Vite + React + TS';
+  readonly title = 'React + Vite + TS';
   readonly viteLink: Locator;
   readonly reactLink: Locator;
   readonly heading: Locator;

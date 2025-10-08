@@ -1,6 +1,6 @@
-![Vite + React App Template](https://raw.githubusercontent.com/andrewdyer/public-assets/refs/heads/main/images/covers/vite-react-app-template.png)
+![React + Vite App Template](https://raw.githubusercontent.com/andrewdyer/public-assets/refs/heads/main/images/covers/react-vite-app-template.png)
 
-# Vite + React App Template
+# React + Vite App Template
 
 A template for building frontend applications using [Vite](https://vitejs.dev/) and [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/).
 

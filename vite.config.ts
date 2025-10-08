@@ -13,8 +13,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Vite React App Template',
-        short_name: 'VRA Template',
+        name: 'React + Vite App Template',
+        short_name: 'RVA Template',
         description:
           'A template for building frontend applications using Vite and React with TypeScript.',
         theme_color: '#ffffff',

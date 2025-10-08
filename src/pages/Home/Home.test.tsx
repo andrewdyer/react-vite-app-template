@@ -6,6 +6,6 @@ describe('Home', () => {
   it('should render the Home component without error', () => {
     render(<Home />);
 
-    expect(screen.getByText('Vite + React')).toBeInTheDocument();
+    expect(screen.getByText('React + Vite')).toBeInTheDocument();
   });
 });
