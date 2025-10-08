@@ -21,7 +21,7 @@ test.describe('Home', () => {
   });
 
   test('Page displays correct heading and text', async () => {
-    await expect(home.heading).toHaveText('Vite + React');
+    await expect(home.heading).toHaveText('React + Vite');
     await expect(home.helperText).toHaveText(
       'Click on the Vite and React logos to learn more'
     );
