@@ -1,6 +1,6 @@
 import { renderWithProviders } from '@/utils/testing';
 import { screen } from '@testing-library/react';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router';
 import App from './App';
 
 vi.mock('@/layouts', async () => ({

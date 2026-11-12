@@ -40,7 +40,6 @@ export default defineConfig({
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
     exclude: ['node_modules'],
     coverage: {
-      all: false,
       enabled: true,
       provider: 'v8',
       thresholds: {

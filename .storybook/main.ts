@@ -11,5 +11,20 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  // Drop vite-plugin-pwa: the service worker is only for the app build, and
+  // it fails trying to precache Storybook's manager bundle.
+  viteFinal: (config) => ({
+    ...config,
+    plugins: config.plugins
+      ?.flat()
+      .filter(
+        (plugin) =>
+          !(
+            plugin &&
+            'name' in plugin &&
+            plugin.name.startsWith('vite-plugin-pwa')
+          )
+      ),
+  }),
 };
 export default config;
