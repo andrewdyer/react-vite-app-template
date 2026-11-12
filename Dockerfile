@@ -50,6 +50,10 @@ COPY --from=build /app/dist /usr/share/nginx/html
 # Copy the app's Nginx server configuration for SPA routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Write the container's VITE_ environment variables to config.js at startup,
+# so the same image can be configured for each environment
+COPY --chmod=755 docker/write-app-config.sh /docker-entrypoint.d/40-write-app-config.sh
+
 # Expose port 80 for HTTP traffic
 EXPOSE 80
 

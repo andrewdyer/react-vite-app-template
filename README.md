@@ -26,6 +26,8 @@ repo/
 ├── .husky/                    # Git hooks for lint-staged and commitlint
 ├── .storybook/                # Storybook configuration and decorators
 │
+├── docker/                    # Container startup script that writes the runtime config
+│
 ├── e2e/
 │   └── tests/                 # Playwright end-to-end and accessibility tests
 │
@@ -35,13 +37,16 @@ repo/
 │   ├── components/
 │   │   ├── pages/             # Screens that own data and business logic
 │   │   └── templates/         # Presentational screen layouts with stories
+│   ├── config/                # Validated application config from environment variables
 │   ├── layouts/               # Route layouts that wrap routes in a template
 │   ├── routes/                # Routes that handle the URL and render pages
+│   ├── types/                 # Global type declarations, including environment variables
 │   ├── utilities/             # Shared helpers, including test utilities
 │   ├── App.tsx                # Application route table
 │   ├── main.tsx               # Application entry point
 │   └── setupTests.ts          # Vitest setup
 │
+├── .env.example               # Example environment variables
 ├── Dockerfile                 # Production image build
 ├── eslint.config.js           # ESLint configuration
 ├── nginx.conf                 # Nginx configuration for serving the app
@@ -55,6 +60,7 @@ The app is built with Vite and TypeScript, providing a fast development experien
 
 - [SWC (Speedy Web Compiler)](https://swc.rs/) for faster builds and development.
 - [React Router](https://reactrouter.com/) data router for client-side routing, with routes, pages and templates kept in separate layers, shared layouts, route error boundaries, and a not-found screen.
+- Runtime configuration from `VITE_` environment variables, validated with [Zod](https://zod.dev/) at startup, so one Docker image can run in every environment.
 - [Vite PWA](https://vite-pwa-org.netlify.app/) for a web app manifest and a service worker that caches the production build.
 - [Vitest](https://vitest.dev/) for unit and component testing, along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing React components, [Vitest UI](https://vitest.dev/guide/ui.html), [jsdom](https://github.com/jsdom/jsdom) environment, and [V8 coverage reports](https://vitest.dev/guide/coverage.html) with enforced thresholds.
 - [Playwright](https://playwright.dev/) for cross-browser end-to-end and accessibility testing against the production build.

@@ -10,6 +10,18 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        // config.js holds per-environment values written at container startup, so it must never
+        // be served from the precache. It is fetched from the network first, and the cached copy
+        // is used only offline.
+        globIgnores: ['config.js'],
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname === '/config.js',
+            handler: 'NetworkFirst',
+          },
+        ],
+      },
       manifest: {
         name: 'React + Vite App Template',
         short_name: 'RVA Template',
@@ -46,6 +58,9 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/setupTests.ts',
+    env: {
+      VITE_APP_NAME: 'React + Vite',
+    },
     include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     coverage: {
       include: ['src/**/*.{ts,tsx}'],

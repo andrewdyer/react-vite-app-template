@@ -28,7 +28,8 @@ Prepare the project for local development after cloning the repository:
 
 1. Clone the repository and navigate to its directory.
 2. Install the correct Node.js version and project dependencies — see [Dependency Management](#dependency-management).
-3. Start the development server with `pnpm dev`.
+3. Copy `.env.example` to `.env` and adjust the values as needed.
+4. Start the development server with `pnpm dev`.
 
 > **Note:** Installing dependencies also sets up the Git hooks that format and lint staged files and validate commit messages.
 
@@ -94,6 +95,7 @@ Generate production assets with the following commands:
 - Preview a production build locally with `pnpm preview`.
 - Build the Storybook site with `pnpm build:storybook`.
 - Build the production Docker image with `docker build -t <image-name> .`.
+- Run the image with `docker run -p 8080:80 -e VITE_APP_NAME="My App" <image-name>`, passing each `VITE_` variable the app needs.
 
 A successful build confirms the app is ready for local development and further validation.
 
