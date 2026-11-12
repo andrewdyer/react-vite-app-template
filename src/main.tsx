@@ -1,15 +1,23 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
+import { createBrowserRouter } from 'react-router';
+import { RouterProvider } from 'react-router/dom';
 
-import App from './App';
+import { registerRuntimeConfigCaching } from '@/config';
+
+import routes from './App';
 
 import './index.css';
 
+/**
+ * The browser router that renders the application's routes from the page URL.
+ */
+const router = createBrowserRouter(routes);
+
+registerRuntimeConfigCaching();
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </StrictMode>
 );

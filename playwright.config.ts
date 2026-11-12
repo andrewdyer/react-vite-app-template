@@ -34,5 +34,8 @@ export default defineConfig({
     command: 'pnpm run build && pnpm run preview',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
+    env: {
+      VITE_APP_NAME: 'React + Vite',
+    },
   },
 });

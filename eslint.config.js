@@ -91,6 +91,12 @@ export default [
       ...playwright.configs.recommended.rules,
     },
   },
+  {
+    files: ['public/**/*.js'],
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
   ...storybook.configs['flat/recommended'],
   {
     ignores: [
