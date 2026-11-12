@@ -3,10 +3,18 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 
 import MainLayout from './MainLayout';
 
+/**
+ * Renders placeholder content for a child route, so tests can check that the layout renders its outlet.
+ */
 const DummyNestedPage = () => {
   return <div data-testid="nested-page">Nested Content</div>;
 };
 
+/**
+ * Renders MainLayout as the root route's element, with a placeholder index route, at `/`.
+ *
+ * @returns The React Testing Library render result.
+ */
 const renderComponent = () => {
   return render(
     <MemoryRouter initialEntries={['/']}>
