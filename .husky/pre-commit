@@ -1,4 +1,4 @@
-yarn lint && \
-yarn format && \
-yarn type-check && \
-yarn test:coverage
+pnpm lint && \
+pnpm format && \
+pnpm type-check && \
+pnpm test:coverage

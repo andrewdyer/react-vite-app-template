@@ -1,20 +1,23 @@
 # Use the official Node.js runtime as the base image
-FROM node:22.12 as build
+FROM node:24.19.0-alpine AS build
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and yarn.lock to the working directory
-COPY package.json yarn.lock ./
+# Enable corepack so the pnpm version pinned in package.json is used
+RUN corepack enable
+
+# Copy package.json and pnpm-lock.yaml to the working directory
+COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies
-RUN yarn install
+RUN pnpm install --frozen-lockfile
 
 # Copy the entire application code to the container
 COPY . .
 
 # Build the React app for production
-RUN yarn build
+RUN pnpm build
 
 # Use Nginx as the production server
 FROM nginx:alpine
