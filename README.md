@@ -64,7 +64,7 @@ repo/
 The app is built with Vite and TypeScript, providing a fast development experience and optimised production builds. Key features include:
 
 - [SWC (Speedy Web Compiler)](https://swc.rs/) for faster builds and development.
-- [React Router](https://reactrouter.com/) data router for client-side routing, with routes, pages and templates kept in separate layers, shared layouts, route error boundaries, and a not-found screen.
+- [React Router](https://reactrouter.com/) data router for client-side routing, with routes, pages and templates kept in separate layers, shared layouts, lazy-loaded screens split into their own chunks, route error boundaries, and a not-found screen.
 - Runtime configuration from `VITE_` environment variables, validated with [Zod](https://zod.dev/) at startup, so one Docker image can run in every environment.
 - [TanStack Query](https://tanstack.com/query) for fetching and caching server data, with responses validated against Zod schemas and an example that loads the signed-in user into a shared header, with loading, error and retry states.
 - [Mock Service Worker](https://mswjs.io/) for mocking the API in unit tests and, optionally, during local development.
