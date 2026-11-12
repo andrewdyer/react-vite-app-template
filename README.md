@@ -38,7 +38,7 @@ repo/
 │   ├── layouts/               # Route layouts that wrap routes in a template
 │   ├── routes/                # Routes that handle the URL and render pages
 │   ├── utilities/             # Shared helpers, including test utilities
-│   ├── App.tsx                # Application routes
+│   ├── App.tsx                # Application route table
 │   ├── main.tsx               # Application entry point
 │   └── setupTests.ts          # Vitest setup
 │
@@ -54,7 +54,7 @@ repo/
 The app is built with Vite and TypeScript, providing a fast development experience and optimised production builds. Key features include:
 
 - [SWC (Speedy Web Compiler)](https://swc.rs/) for faster builds and development.
-- [React Router](https://reactrouter.com/) for client-side routing, with routes, pages and templates kept in separate layers and rendered inside shared layouts.
+- [React Router](https://reactrouter.com/) data router for client-side routing, with routes, pages and templates kept in separate layers, shared layouts, route error boundaries, and a not-found screen.
 - [Vite PWA](https://vite-pwa-org.netlify.app/) for a web app manifest and a service worker that caches the production build.
 - [Vitest](https://vitest.dev/) for unit and component testing, along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing React components, [Vitest UI](https://vitest.dev/guide/ui.html), [jsdom](https://github.com/jsdom/jsdom) environment, and [V8 coverage reports](https://vitest.dev/guide/coverage.html) with enforced thresholds.
 - [Playwright](https://playwright.dev/) for cross-browser end-to-end and accessibility testing against the production build.

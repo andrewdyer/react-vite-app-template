@@ -1,11 +1,11 @@
-import { screen } from '@testing-library/react';
-import { Outlet } from 'react-router';
+import { render, screen, within } from '@testing-library/react';
+import { createMemoryRouter, Outlet, RouterProvider } from 'react-router';
 
-import { renderWithProviders } from '@/utilities/testing';
+import routes from './App';
 
-import App from './App';
+const { HomeRoute } = vi.hoisted(() => ({ HomeRoute: vi.fn() }));
 
-vi.mock('@/layouts', async () => ({
+vi.mock('@/layouts', () => ({
   MainLayout: () => (
     <div data-testid="main-layout">
       <Outlet />
@@ -13,22 +13,61 @@ vi.mock('@/layouts', async () => ({
   ),
 }));
 
-vi.mock('@/routes', async () => ({
-  HomeRoute: () => <div data-testid="home-route">Home Route</div>,
+vi.mock('@/routes', () => ({
+  ErrorRoute: () => <div data-testid="error-route">Error Route</div>,
+  HomeRoute,
+  NotFoundRoute: () => <div data-testid="not-found-route">Not Found Route</div>,
 }));
 
-describe('App', () => {
-  it('should render the MainLayout component when navigating to the root path', () => {
-    renderWithProviders(<App />, { initialEntries: ['/'] });
+/**
+ * Renders the application's route table in an in-memory router at the given URL.
+ *
+ * @param url - The URL the router starts at.
+ * @returns The React Testing Library render result.
+ */
+const renderAt = (url: string) => {
+  const router = createMemoryRouter(routes, { initialEntries: [url] });
 
-    const mainLayout = screen.getByTestId('main-layout');
-    expect(mainLayout).toBeInTheDocument();
+  return render(<RouterProvider router={router} />);
+};
+
+describe('App', () => {
+  beforeEach(() => {
+    HomeRoute.mockImplementation(() => (
+      <div data-testid="home-route">Home Route</div>
+    ));
   });
 
-  it('should render the HomeRoute component when navigating to the root path', () => {
-    renderWithProviders(<App />, { initialEntries: ['/'] });
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
-    const homeRoute = screen.getByTestId('home-route');
-    expect(homeRoute).toBeInTheDocument();
+  it('should render the HomeRoute inside the MainLayout at the root path', () => {
+    renderAt('/');
+
+    expect(
+      within(screen.getByTestId('main-layout')).getByTestId('home-route')
+    ).toBeInTheDocument();
+  });
+
+  it('should render the NotFoundRoute inside the MainLayout for an unknown path', () => {
+    renderAt('/missing');
+
+    expect(
+      within(screen.getByTestId('main-layout')).getByTestId('not-found-route')
+    ).toBeInTheDocument();
+  });
+
+  it('should render the ErrorRoute inside the MainLayout when a screen throws', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    HomeRoute.mockImplementation(() => {
+      throw new Error('Failed to render');
+    });
+
+    renderAt('/');
+
+    expect(
+      within(screen.getByTestId('main-layout')).getByTestId('error-route')
+    ).toBeInTheDocument();
   });
 });
