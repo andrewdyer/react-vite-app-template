@@ -6,8 +6,8 @@ import { currentUserSchema } from './currentUser.schema';
  * Fetches the signed-in user from the API.
  *
  * @remarks
- * The API decides who is signed in, for example from a session cookie or an authorization header
- * that the request carries.
+ * The request carries no credentials yet, so the API cannot tell who is signed in until
+ * authentication is added to {@link apiRequest}.
  *
  * @returns The validated signed-in user.
  * @throws {@link ApiError}

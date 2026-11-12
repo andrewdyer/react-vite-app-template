@@ -11,6 +11,12 @@ import { ApiError } from './ApiError';
  * Validating the body means a change in the API's response shape fails at the request, with a
  * message naming the unexpected fields, rather than later where the data is used.
  *
+ * Requests use fetch's default `credentials: 'same-origin'`, so cookies reach the API only when it
+ * shares the application's origin. Add authentication here, where it applies to every request: set
+ * `credentials: 'include'` for cookie sessions on another origin, which needs the API to allow
+ * credentialed CORS from the application's exact origin, or add an `Authorization` header for
+ * tokens.
+ *
  * @typeParam T - The validated response type the schema produces.
  * @param path - The resource path, relative to the API URL, starting with `/`.
  * @param schema - The schema the response body must match.
