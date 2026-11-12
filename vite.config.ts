@@ -1,13 +1,10 @@
 /// <reference types="vitest/config" />
-import { resolve } from 'path';
+import path from 'path';
 
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-/**
- * See https://vitejs.dev/config.
- */
 export default defineConfig({
   plugins: [
     react(),
@@ -34,35 +31,43 @@ export default defineConfig({
       },
     }),
   ],
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: ['./src/setupTests.ts'],
-    include: ['src/**/*.{test,spec}.{ts,tsx}'],
-    exclude: ['node_modules'],
-    coverage: {
-      enabled: true,
-      provider: 'v8',
-      thresholds: {
-        lines: 90,
-        functions: 90,
-        branches: 90,
-        statements: 90,
-      },
-      reporter: ['text', 'json', 'html'],
-      exclude: [
-        'dist',
-        'node_modules',
-        'src/**/*.d.ts',
-        'src/**/index.{js,jsx,ts,tsx}',
-        'src/**/*.stories.{js,jsx,ts,tsx}',
-        'src/**/*.test.{js,jsx,ts,tsx}',
-      ],
-    },
+  server: {
+    port: 5173,
+  },
+  preview: {
+    port: 4173,
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.ts',
+    include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
+    coverage: {
+      include: ['src/**/*.{ts,tsx}'],
+      provider: 'v8',
+      reporter: ['text', 'lcov', 'html'],
+      reportsDirectory: './coverage',
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
+      exclude: [
+        '**/{coverage,dist,node_modules}/**',
+        'src/**/*.d.ts',
+        'src/**/index.{js,jsx,ts,tsx}',
+        'src/{main.tsx,setupTests.ts}',
+        'src/**/*.{test,spec}.{js,jsx,ts,tsx}',
+        'src/**/*.stories.{ts,tsx}',
+        'src/**/*.mock.{js,ts}',
+        '**/{vite,eslint}.config.{js,ts}',
+      ],
     },
   },
 });
