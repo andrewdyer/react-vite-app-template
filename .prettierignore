@@ -1,0 +1,11 @@
+# Dependencies
+node_modules
+
+# Build outputs
+coverage
+dist
+storybook-static
+
+# Test artifacts
+test-results
+playwright-report

@@ -1,4 +1,2 @@
-pnpm lint && \
-pnpm format && \
-pnpm typecheck && \
-pnpm test:coverage
+echo "Running lint-staged..."
+pnpm exec lint-staged
