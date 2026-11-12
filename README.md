@@ -1,73 +1,81 @@
-![React + Vite App Template](https://public-assets.andrewdyer.rocks/images/covers/react-vite-app-template.png)
-
 # React + Vite App Template
 
-A template for building frontend applications using [Vite](https://vitejs.dev/) and [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/).
+A template for building browser-based applications using the [React](https://react.dev/) framework and the [Vite](https://vitejs.dev/) build tool, and written in [TypeScript](https://www.typescriptlang.org/).
 
-## ⚖️ License
+## Introduction
 
-Licensed under the [MIT license](https://opensource.org/licenses/MIT) and is free for private or commercial projects.
+This template provides a focused foundation for building, testing and shipping a single React application. It is designed to support consistent tooling, reliable builds, and automated releases, so effort goes into the application rather than the setup. Its linting, testing, Storybook and commit conventions match the web app in the [React + Vite + Turborepo Template](https://github.com/andrewdyer/react-vite-turborepo-template), so applications built here follow the same standards and can move into the monorepo later.
 
-## ✨ Introduction
-
-This template enhances the official Vite template for React with TypeScript and SWC (Speedy Web Compiler) by integrating additional tools and configurations, while implementing an architecture that focuses on clarity, modularity, and maintainability. It serves the purpose of providing a solid foundation to help you hit the ground running and save valuable time when starting a new project.
-
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-- **[Node.js](https://nodejs.org/)**: Version 24.19.0 or higher is required (as specified in [.nvmrc](.nvmrc)).
-- **[pnpm](https://pnpm.io/)**: Fast, disk space efficient package manager for Node.js.
-- **[Docker](https://www.docker.com/)** (optional): For containerizing the application.
+- **[Node.js](https://nodejs.org/)**: Version 24.19.0 or later is required (as specified in [.nvmrc](.nvmrc)).
+- **[pnpm](https://pnpm.io/)**: Dependency management tool for Node.js, version 10.17.1 (as specified in [package.json](package.json)).
+- **[Docker](https://www.docker.com/)** (optional): For containerising the application.
 
-## 🛠️ Features
+## App
 
-This template includes the following additional tools and configurations:
-
-- [Vitest](https://vitest.dev/) for unit testing, along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing React components, Vitest UI, and coverage reports.
-- [Playwright](https://playwright.dev/) for end-to-end testing with UI and coverage support.
-- [Storybook](https://storybook.js.org/) for building and testing UI components in isolation.
-- [React Router](https://reactrouter.com/) for client-side routing.
-- [Vite PWA](https://vite-pwa-org.netlify.app/) (Progressive Web App) support for offline capabilities and better performance on mobile devices.
-- [Prettier](https://prettier.io/) for consistent code formatting across the codebase.
-- [Husky](https://typicode.github.io/husky/#/) for Git hooks to automate tasks such as linting, formatting, type-checking, and testing before commits.
-- CI (Continuous Integration) setup with [GitHub Actions](https://github.com/features/actions) for automated testing, building, and type-checking.
-- [Docker](https://www.docker.com/) support for containerizing the application.
-
-🏗️ Architecture
-
-The primary source code lives in the `src/` folder, organized into several key directories:
+The repository follows a clear structure, keeping pages and layouts together with their tests and stories, alongside the end-to-end tests and the build, deployment and tooling configuration.
 
 ```plaintext
-src/
-├── layouts/
-│   └── ...
+repo/
+├── .github/
+│   └── workflows/             # Test, PR title, release, publish, deploy and rollback workflows
 │
-├── pages/
-│   └── ...
+├── .husky/                    # Git hooks for lint-staged and commitlint
+├── .storybook/                # Storybook configuration and decorators
 │
-├── utils/
-│   └── ...
+├── e2e/
+│   └── tests/                 # Playwright end-to-end and accessibility tests
 │
-├── App.tsx
-├── index.tsx
-├── index.css
-├── setupTests.ts
-└── vite-env.d.ts
+├── public/                    # Static assets copied into the build
+│
+├── src/
+│   ├── layouts/               # Route layouts with tests
+│   ├── pages/                 # Route pages with tests and stories
+│   ├── utils/                 # Shared helpers, including test utilities
+│   ├── App.tsx                # Application routes
+│   ├── main.tsx               # Application entry point
+│   └── setupTests.ts          # Vitest setup
+│
+├── Dockerfile                 # Production image build
+├── eslint.config.js           # ESLint configuration
+├── nginx.conf                 # Nginx configuration for serving the app
+├── package.json               # App manifest and scripts
+├── playwright.config.ts       # Playwright configuration
+├── tsconfig.json              # TypeScript project references
+└── vite.config.ts             # App build and Vitest configuration
 ```
 
-The application entry point is `index.tsx`, which renders the `App` component and serves as the central place to wrap it with global providers such as client-side routing, state management, or theming. This way, those providers are available throughout the entire application.
+The app is built with Vite and TypeScript, providing a fast development experience and optimised production builds. Key features include:
 
-The core `App` component sets up client-side routing and organizes application pages through layouts. Shared route-aware structures live in `layouts/`, while top-level views are placed in `pages/`. General-purpose helpers reside in `utils/`, and global styles are defined in `index.css`. Supporting files include `setupTests.ts`, which configures the testing environment, and `vite-env.d.ts`, which defines Vite environment types.
+- [SWC (Speedy Web Compiler)](https://swc.rs/) for faster builds and development.
+- [React Router](https://reactrouter.com/) for client-side routing, with pages rendered inside shared layouts.
+- [Vite PWA](https://vite-pwa-org.netlify.app/) for a web app manifest and a service worker that caches the production build.
+- [Vitest](https://vitest.dev/) for unit and component testing, along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing React components, [Vitest UI](https://vitest.dev/guide/ui.html), [jsdom](https://github.com/jsdom/jsdom) environment, and [V8 coverage reports](https://vitest.dev/guide/coverage.html) with enforced thresholds.
+- [Playwright](https://playwright.dev/) for cross-browser end-to-end and accessibility testing against the production build.
+- [Storybook](https://storybook.js.org/) for developing and documenting pages and components in isolation.
+- [ESLint](https://eslint.org/) for linting TypeScript, React and hooks usage, accessibility, import ordering, Storybook stories, and Playwright tests.
+- Pre-commit checks with [lint-staged](https://github.com/lint-staged/lint-staged) to maintain code quality.
 
-This structure is a starting point that can be extended as the project grows — for example, reusable UI elements could be grouped into a `components/` folder, API logic centralized in a `services/` folder, or application state kept in a `store/` folder. Its modular approach keeps concerns encapsulated and makes the codebase easier to maintain and scale over time.
+## Tooling
 
-To simplify imports and keep the codebase organized, path aliases are configured in `vite.config.ts` and `tsconfig.app.json`. By default, the `@` alias points to the `src/` directory, allowing clean, consistent imports as the project grows.
+Essential development tools configured for consistency and automation across the app, including:
 
-## 🚀 Getting Started
+- [Husky](https://typicode.github.io/husky) for Git hooks that automate development workflows, including staged file checks and commit message validation.
+- [Commitlint](https://commitlint.js.org/) for enforcing a consistent commit message convention on commits and pull request titles.
+- [Prettier](https://prettier.io/) for maintaining consistent code formatting.
+- [Docker](https://www.docker.com/) for containerising the app with a multi-stage build served by Nginx.
+- [Release Please](https://github.com/googleapis/release-please) for automated versioning and changelogs based on commit messages.
+- [GitHub Actions](https://github.com/features/actions) for CI/CD, covering testing and pull request title checks, automated releasing, publishing the Docker image to [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry), and deployment and rollback workflow templates that require project-specific configuration.
+
+Together, these tools create a fast, reliable, and maintainable developer experience from the first page to the first release.
+
+## Getting Started
 
 If you like what you've seen so far and think this setup fits your needs, you can quickly get started by clicking the **Use this template** button at the top of the repository on GitHub.
 
-## 🤝 Contributing
+## License
 
-Before contributing to this project, please refer to the [contributing](./CONTRIBUTING.md) documentation for a more in-depth setup guide, including details on running tests, Storybook, coding standards, and the pull request process.
+This template is licensed under the [MIT license](https://opensource.org/licenses/MIT) and is free for private or commercial projects.

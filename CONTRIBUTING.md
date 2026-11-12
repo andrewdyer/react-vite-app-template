@@ -1,111 +1,220 @@
 # Contributing
 
-Thank you for your interest in contributing! We welcome improvements and suggestions to make this project even better. Please follow the guidelines below for a smooth experience.
+Thank you for your interest in contributing! Contributions and suggestions that improve the project are always welcome. The guidelines below help ensure a smooth and productive experience for everyone involved.
 
 ## Table of Contents
 
+- [Code of Conduct](#code-of-conduct)
 - [Development Setup](#development-setup)
-- [Upgrading Dependencies](#upgrading-dependencies)
+- [Development Workflow](#development-workflow)
+  - [Branching](#branching)
+  - [Coding](#coding)
+  - [Building](#building)
+  - [Testing](#testing)
+  - [Committing](#committing)
+- [Dependency Management](#dependency-management)
 - [Coding Standards](#coding-standards)
-- [Commit Guidelines](#commit-guidelines)
-- [Testing](#testing)
-- [Building](#building)
-- [Dockerizing](#dockerizing)
-- [Submitting Changes](#submitting-changes)
+- [Issue Reporting](#issue-reporting)
+
+## Code of Conduct
+
+We strive to maintain a welcoming, respectful, and inclusive community where everyone can collaborate productively. Please adhere to our [Code of Conduct](./CODE_OF_CONDUCT.md) in all interactions.
 
 ## Development Setup
 
-To get started with contributing, set up the project by following these steps:
+A consistent development environment helps ensure contributors can build, test, and run the project reliably.
 
-1. Begin by cloning the repository and navigating to its directory.
-2. Use the correct Node.js version specified in [.nvmrc](.nvmrc):
-   - Install `nvm` if you haven't already. Follow the instructions on the [nvm GitHub repository](https://github.com/nvm-sh/nvm).
-   - Run `nvm use` to switch to the required Node.js version.
-3. Install all project dependencies to ensure a complete setup with `pnpm install`.
-4. Start the development server using `pnpm start` to begin working on the project.
-5. Start Storybook using `pnpm start:storybook` to develop and test UI components in isolation.
-6. Run tests with `pnpm test` to verify that the environment is working correctly. You can also use `pnpm test:watch` to run the tests in watch mode, `pnpm test:coverage` to generate a coverage report, and `pnpm test:ui` to run the tests with the Vitest UI.
+Prepare the project for local development after cloning the repository:
 
-## Upgrading Dependencies
+1. Clone the repository and navigate to its directory.
+2. Install the correct Node.js version and project dependencies — see [Dependency Management](#dependency-management).
+3. Start the development server with `pnpm start`.
 
-Keeping dependencies up-to-date is crucial for maintaining the security and performance of the project. Follow these steps to upgrade dependencies:
+> **Note:** Installing dependencies also sets up the Git hooks that format and lint staged files and validate commit messages.
 
-1. Check for outdated dependencies with `pnpm outdated`.
-2. Update dependencies using `pnpm update` or update a specific package with `pnpm add <package-name>@latest`.
-3. Ensure everything works after the upgrade by running the tests with `pnpm test`.
-4. Make sure the `pnpm-lock.yaml` file is updated with the latest dependency versions by running `pnpm install`.
-5. Commit the changes to the repository with a clear commit message.
-6. Push the changes to your branch and create a pull request for review.
+A running development server confirms the environment is ready for local changes.
+
+> **Tip:** Run `pnpm start:storybook` to develop and preview pages and components in isolation.
+
+## Development Workflow
+
+Moving from a new branch to a reviewable change follows the same sequence for every contribution.
+
+### Branching
+
+Keeping work isolated in focused branches makes reviews easier and reduces the risk of unrelated changes being introduced.
+
+Choose the appropriate target branch before creating a feature branch:
+
+- Bug fixes should be sent to the latest stable branch.
+- Minor features that are fully backwards compatible with the current release may be sent to the latest stable branch.
+- Major features should always be sent to the `main` branch, which contains the upcoming release.
+
+Create and submit a branch for each change in order:
+
+1. Create a feature branch for each change with `git checkout -b feature/your-feature-name`.
+2. Complete the change, then build, test, and commit it — see [Coding](#coding), [Building](#building), [Testing](#testing), and [Committing](#committing).
+3. Push the branch once changes are ready with `git push origin feature/your-feature-name`.
+4. Open a pull request with a title and description that clearly explain the change — see [Committing](#committing) for the title format.
+
+An open pull request signals the change is ready for review.
+
+> **Tip:** GitHub pre-fills the description from the repository's single pull request template, ready to complete before submitting.
+
+The review process continues until the change is ready to merge:
+
+- Review feedback carefully and suggest improvements or alternatives when needed.
+- Apply requested changes in follow-up commits instead of overwriting or squashing history; the merge will be squashed later.
+- Keep the branch up to date with the target branch if new commits land while review is in progress.
+- Re-request review after the requested changes are in place.
+- Resolve review conversations once the underlying concern has been addressed.
+
+The pull request is ready to merge once review conversations are resolved and required checks pass.
+
+### Coding
+
+Keeping changes focused makes reviews easier and reduces the likelihood of unrelated regressions.
+
+Write the change with the existing codebase in mind:
+
+- Keep changes limited to the branch's purpose, avoiding unrelated edits.
+- Match existing patterns and conventions already used nearby in the codebase.
+- Add or update Storybook stories alongside page and component changes.
+- Apply the formatting and linting expectations described in [Coding Standards](#coding-standards) while writing code.
+
+A focused, convention-following change is faster to review and less likely to introduce regressions.
+
+### Building
+
+Building the app validates that production assets can be generated successfully before changes are submitted.
+
+Generate production assets with the following commands:
+
+- Build the app with `pnpm build`.
+- Preview a production build locally with `pnpm preview`.
+- Build the Storybook site with `pnpm build:storybook`.
+- Build the production Docker image with `docker build -t <image-name> .`.
+
+A successful build confirms the app is ready for local development and further validation.
+
+### Testing
+
+Writing tests and checking static types helps verify changes behave as expected and reduces the chance of regressions reaching other contributors.
+
+Run the validation suite before submitting changes:
+
+- Check static types with `pnpm typecheck`.
+- Execute all tests with `pnpm test`.
+- Re-run tests on file changes with `pnpm test:watch`.
+- Check test coverage with `pnpm test:coverage`.
+- Explore tests interactively with `pnpm test:ui`.
+- Check end-to-end behaviour with `pnpm test:e2e`, or explore it interactively with `pnpm test:e2e:ui`.
+
+> **Note:** Running the end-to-end tests builds and previews the app automatically. Install the Playwright browsers once with `pnpm exec playwright install` before the first run.
+
+Structure test files consistently for readability and easier maintenance:
+
+- Mock dependencies and libraries first.
+- Define helper functions and constants for mock data.
+- Group focused test cases in `describe` blocks.
+
+Passing type checks and tests confirm changes behave as intended and are ready for review.
+
+### Committing
+
+Consistent commit messages, written in a shared format, improve project history and clarify the intent behind each change.
+
+Follow the format below for every commit:
+
+```text
+<type>(<scope>): <description>
+
+<body>
+
+[optional footer]
+```
+
+The subject line summarises the change and must:
+
+1. **Use a valid commit type.**
+   - A new feature uses `feat`.
+   - A bug fix uses `fix`.
+   - A dependency change uses `deps`.
+   - Maintenance, documentation, refactors, tests, and CI changes use `chore`, `docs`, `refactor`, `test`, or `ci`.
+2. **Use the scope to identify the affected area of the app.**
+3. **Have a clear description.**
+   - Use lowercase text.
+   - Be written in the imperative style (for example, `add feature` instead of `added feature`).
+   - Be concise and specific enough to understand the change at a glance.
+   - Do not end with a full stop.
+   - Keep the subject line under 72 characters.
+
+> **Tip:** Omit the scope for changes that are not specific to one area of the app.
+
+The body provides additional context about the change and should:
+
+- Explain what changed and why.
+- Include relevant context that helps reviewers understand the decision without reading the diff.
+- Keep lines under 100 characters.
+- Use paragraphs rather than lists or headers.
+
+The footer is optional and is used for additional metadata, such as breaking changes.
+
+- A breaking change should use `!` after the type (for example, `feat!`) or include a `BREAKING CHANGE:` footer.
+
+> **Note:** Pull request titles follow the same format, since they become the squash merge commit message.
+
+A well-formatted commit message helps reviewers and future contributors understand why a change was made.
+
+## Dependency Management
+
+Dependencies should be managed carefully to keep the project secure, compatible, and easy to maintain over time.
+
+Install dependencies before running the project locally:
+
+- Install the Node.js version specified in `.nvmrc`, or run `nvm install` and `nvm use` when using [nvm](https://github.com/nvm-sh/nvm).
+- Install every dependency with `pnpm install`.
+
+Manage dependencies with these commands:
+
+- Add a dependency with `pnpm add <package-name>`.
+- Add a development dependency with `pnpm add -D <package-name>`.
+- Remove a dependency with `pnpm remove <package-name>`.
+
+Check for outdated dependencies before planning an update:
+
+- Check every dependency with `pnpm outdated`.
+
+Update dependencies to bring in fixes and improvements:
+
+- Update every dependency with `pnpm update`.
+
+After any dependency change, confirm compatibility by [building](#building) and [testing](#testing) the app, then commit the updated lockfile.
 
 ## Coding Standards
 
-To maintain code quality and consistency, please follow these guidelines:
+Following shared coding conventions keeps the codebase consistent, readable, and easier to maintain.
 
-- Run `pnpm format` to format code using Prettier and `pnpm lint` for linting with ESLint.
-- Organize imports into clearly separated groups, following this order: React imports, third-party packages, app-level aliases, and local imports.
-- Arrange imports alphabetically by package name within each group to improve readability.
+Apply consistent formatting and linting before submitting changes:
 
-## Commit Guidelines
+- Format code using [Prettier](https://prettier.io/) with `pnpm format`.
+- Lint code using [ESLint](https://eslint.org/) with `pnpm lint`.
 
-Use clear, descriptive commit messages following the [Conventional Commits](https://www.conventionalcommits.org/) format. Add emojis to quickly convey the type of change if desired, following [Git Commit Emoji](https://dev.andrewdyer.rocks/git-commit-emoji) conventions.
+Formatted and linted code passes CI checks without additional review comments on style.
 
-## Testing
+## Issue Reporting
 
-Please write tests for any new features or modifications to the project. Follow these steps to ensure your tests are effective, consistent, and easy to maintain:
+Clear issue reports make it easier to reproduce problems, discuss improvements, and track future work.
 
-### Unit & Component Tests
+Select the template that matches the issue before submitting a report:
 
-- Use the `.test.ts(x)` naming convention for unit and component tests.
-- Run tests with `pnpm test`.
-- Check code coverage using `pnpm test:coverage`.
-- For an interactive experience, launch Vitest UI via `pnpm test:ui`.
-- Ensure that code coverage meets the following thresholds: **Lines**, **Functions**, **Branches**, and **Statements** all at 90%.
+- Unexpected behaviour or defects use the Bug Report template.
+- New features or enhancements use the Feature Request template.
+- Changes to existing functionality use the Improvement template.
+- Missing or unclear documentation uses the Documentation template.
+- Requests for help or clarification use the Question template.
+- Avoid duplicate reports by searching existing issues and checking the README and documentation first.
 
-### End-to-End (E2E) Tests
+> **Tip:** GitHub shows the matching template automatically once an issue category is selected.
 
-- Use the `.spec.ts(x)` naming convention for E2E tests.
-- Run E2E tests using `pnpm test:e2e`.
-- For debugging or exploring flows, use Playwright UI via `pnpm test:e2e:ui`.
-
-### Testing Guidelines
-
-When writing tests:
-
-- Mock dependencies or libraries as needed.
-- Use helper functions to simplify repetitive logic.
-- Define constants for mock data or configurations.
-- Use `describe` blocks to structure test suites and keep tests focused.
-- Prioritize readability, reusability, and clarity.
-
-Before submitting changes, ensure **all tests pass** and coverage is maintained.
-
-## Building
-
-Use the following commands as needed to build and preview the project:
-
-- Build the project for production using TypeScript and Vite with `pnpm build`.
-- Generate a static Storybook build with `pnpm build:storybook`.
-- Preview the production build locally using Vite with `pnpm preview`.
-
-## Dockerizing
-
-Use the following commands to containerize your application for consistent deployment across environments:
-
-1. Build the Docker image using:
-
-   `docker build -t <image-name> .`
-
-2. Start the container and map ports:
-
-   `docker run --name <container-name> -p 8080:80 -d <image-name>`
-
-Your application will now be accessible at http://localhost:8080.
-
-## Submitting Changes
-
-Once you've made your changes, follow these steps to submit them for review:
-
-1. Create a feature branch with `git checkout -b feature/your-feature-name`.
-2. Commit your changes following the commit guidelines.
-3. Push your branch with `git push origin feature/your-feature-name`.
-4. Open a pull request with a title and description that clearly explain your changes.
+A complete, well-templated report helps maintainers triage and respond quickly.
