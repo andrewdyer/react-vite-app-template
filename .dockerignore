@@ -1,24 +1,37 @@
-# Ignore node_modules
-node_modules
+# Logs
+**/logs
+**/*.log
+**/pnpm-debug.log*
 
-# Ignore logs
-*.log
+# Environment files
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
 
-# Ignore build output
-dist
+# Dependencies
+**/node_modules
+**/.pnpm-store
 
-# Ignore local environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Build outputs
+**/coverage
+**/dist
+**/storybook-static
 
-# Ignore Git files
+# Test artifacts
+**/test-results
+**/playwright-report
+
+# Editor / OS
+**/.vscode
+**/.idea
+**/.DS_Store
+**/*.suo
+**/*.ntvs*
+**/*.njsproj
+**/*.sln
+**/*.sw?
+
+# VCS
 .git
 .gitignore
-
-# Ignore IDE/editor config files
-.vscode
-.idea
-*.swp
