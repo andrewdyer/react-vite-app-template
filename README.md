@@ -35,11 +35,16 @@ repo/
 │
 ├── src/
 │   ├── components/
+│   │   ├── organisms/         # Interface sections that receive data through props
 │   │   ├── pages/             # Screens that own data and business logic
 │   │   └── templates/         # Presentational screen layouts with stories
 │   ├── config/                # Validated application config from environment variables
+│   ├── hooks/                 # Hooks, including TanStack Query hooks used by pages
 │   ├── layouts/               # Route layouts that wrap routes in a template
+│   ├── mocks/                 # MSW handlers and fixtures for tests and local development
+│   ├── providers/             # Providers composed at the application root
 │   ├── routes/                # Routes that handle the URL and render pages
+│   ├── services/              # API client, request functions and response schemas
 │   ├── types/                 # Global type declarations, including environment variables
 │   ├── utilities/             # Shared helpers, including test utilities
 │   ├── App.tsx                # Application route table
@@ -61,6 +66,8 @@ The app is built with Vite and TypeScript, providing a fast development experien
 - [SWC (Speedy Web Compiler)](https://swc.rs/) for faster builds and development.
 - [React Router](https://reactrouter.com/) data router for client-side routing, with routes, pages and templates kept in separate layers, shared layouts, route error boundaries, and a not-found screen.
 - Runtime configuration from `VITE_` environment variables, validated with [Zod](https://zod.dev/) at startup, so one Docker image can run in every environment.
+- [TanStack Query](https://tanstack.com/query) for fetching and caching server data, with responses validated against Zod schemas and an example that loads the signed-in user into a shared header, with loading, error and retry states.
+- [Mock Service Worker](https://mswjs.io/) for mocking the API in unit tests and, optionally, during local development.
 - [Vite PWA](https://vite-pwa-org.netlify.app/) for a web app manifest and a service worker that caches the production build.
 - [Vitest](https://vitest.dev/) for unit and component testing, along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing React components, [Vitest UI](https://vitest.dev/guide/ui.html), [jsdom](https://github.com/jsdom/jsdom) environment, and [V8 coverage reports](https://vitest.dev/guide/coverage.html) with enforced thresholds.
 - [Playwright](https://playwright.dev/) for cross-browser end-to-end and accessibility testing against the production build.

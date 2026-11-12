@@ -1,3 +1,4 @@
+import { QueryClientProvider } from '@tanstack/react-query';
 import { render, type RenderOptions } from '@testing-library/react';
 import {
   createContext,
@@ -8,12 +9,14 @@ import {
 } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 
+import { createQueryClient } from '@/services';
+
 /**
  * Describes the options accepted by renderWithProviders.
  *
  * @remarks
  * Accepts every React Testing Library render option except `wrapper`, which renderWithProviders
- * supplies to provide the router.
+ * supplies to provide the router and query client.
  */
 type ProviderOptions = {
   /**
@@ -26,13 +29,15 @@ type ProviderOptions = {
 } & Omit<RenderOptions, 'wrapper'>;
 
 /**
- * Renders a React element for testing as the only route of an in-memory data router, so components
- * that use routing hooks, including data router hooks, can render without a browser URL.
+ * Renders a React element for testing as the only route of an in-memory data router, with its own
+ * query client, so components that use routing hooks or queries can render without a browser URL
+ * or a shared cache.
  *
  * @remarks
  * The element is matched at every URL, so `initialEntries` sets the location it sees without
- * affecting whether it renders. The router is created once, so `rerender` replaces the element
- * while keeping the router, its location and the element's state.
+ * affecting whether it renders. The router and query client are created once, so `rerender`
+ * replaces the element while keeping the router, its location, the query cache and the element's
+ * state. Failed queries are not retried, so error states appear straight away.
  *
  * @param ui - The element to render.
  * @param options - The router's starting history and any other render options. Defaults to an empty object.
@@ -51,11 +56,16 @@ const renderWithProviders = (
         initialEntries,
       })
     );
+    const [queryClient] = useState(() =>
+      createQueryClient({ defaultOptions: { queries: { retry: false } } })
+    );
 
     return (
-      <UiContext value={children}>
-        <RouterProvider router={router} />
-      </UiContext>
+      <QueryClientProvider client={queryClient}>
+        <UiContext value={children}>
+          <RouterProvider router={router} />
+        </UiContext>
+      </QueryClientProvider>
     );
   };
 

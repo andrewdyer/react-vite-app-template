@@ -1,0 +1,1 @@
+export { currentUserFixture } from './currentUser';

@@ -4,6 +4,8 @@ import { createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 
 import { registerRuntimeConfigCaching } from '@/config';
+import { enableMocking } from '@/mocks/enableMocking';
+import { QueryProvider } from '@/providers';
 
 import routes from './App';
 
@@ -16,8 +18,12 @@ const router = createBrowserRouter(routes);
 
 registerRuntimeConfigCaching();
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <QueryProvider>
+        <RouterProvider router={router} />
+      </QueryProvider>
+    </StrictMode>
+  );
+});

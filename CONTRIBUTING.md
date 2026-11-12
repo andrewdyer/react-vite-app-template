@@ -28,7 +28,7 @@ Prepare the project for local development after cloning the repository:
 
 1. Clone the repository and navigate to its directory.
 2. Install the correct Node.js version and project dependencies — see [Dependency Management](#dependency-management).
-3. Copy `.env.example` to `.env` and adjust the values as needed.
+3. Copy `.env.example` to `.env` and adjust the values as needed. It enables API mocking, so the app runs without a backend; set `VITE_API_MOCKING` to anything else to use the API at `VITE_API_URL`.
 4. Start the development server with `pnpm dev`.
 
 > **Note:** Installing dependencies also sets up the Git hooks that format and lint staged files and validate commit messages.
@@ -95,7 +95,7 @@ Generate production assets with the following commands:
 - Preview a production build locally with `pnpm preview`.
 - Build the Storybook site with `pnpm build:storybook`.
 - Build the production Docker image with `docker build -t <image-name> .`.
-- Run the image with `docker run -p 8080:80 -e VITE_APP_NAME="My App" <image-name>`, passing each `VITE_` variable the app needs.
+- Run the image with `docker run -p 8080:80 -e VITE_APP_NAME="My App" -e VITE_API_URL="https://api.example.com" <image-name>`, passing each `VITE_` variable the app needs.
 
 A successful build confirms the app is ready for local development and further validation.
 
@@ -119,6 +119,7 @@ Structure test files consistently for readability and easier maintenance:
 - Mock dependencies and libraries first.
 - Define helper functions and constants for mock data.
 - Group focused test cases in `describe` blocks.
+- Mock API requests with the handlers in `src/mocks`, overriding them for a single test with `server.use`, rather than stubbing `fetch`.
 
 Passing type checks and tests confirm changes behave as intended and are ready for review.
 
