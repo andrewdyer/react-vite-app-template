@@ -1,6 +1,6 @@
 import type { RouteObject } from 'react-router';
 
-import { MainLayout } from '@/layouts';
+import { ErrorLayout, MainLayout } from '@/layouts';
 import { ErrorRoute, HomeRoute, NotFoundRoute } from '@/routes';
 
 /**
@@ -8,14 +8,15 @@ import { ErrorRoute, HomeRoute, NotFoundRoute } from '@/routes';
  *
  * @remarks
  * Screens sit in a pathless route with its own error boundary, so an error in a screen is shown
- * inside the layout. The root route's error boundary is a fallback for errors in the layout itself.
+ * inside the layout. The root route's error boundary is a fallback for errors in the layout itself,
+ * and renders its own main landmark because the layout's markup is gone.
  * Any URL that matches no screen shows the not-found screen.
  */
 const routes: RouteObject[] = [
   {
     path: '/',
     Component: MainLayout,
-    ErrorBoundary: ErrorRoute,
+    ErrorBoundary: ErrorLayout,
     children: [
       {
         ErrorBoundary: ErrorRoute,
