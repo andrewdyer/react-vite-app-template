@@ -15,7 +15,11 @@ vi.mock('@/layouts', () => ({
 
 vi.mock('@/routes', () => ({
   ErrorRoute: () => <div data-testid="error-route">Error Route</div>,
-  HomeRoute,
+}));
+
+vi.mock('@/routes/HomeRoute', () => ({ HomeRoute }));
+
+vi.mock('@/routes/NotFoundRoute', () => ({
   NotFoundRoute: () => <div data-testid="not-found-route">Not Found Route</div>,
 }));
 
@@ -47,23 +51,27 @@ describe('App', () => {
     vi.restoreAllMocks();
   });
 
-  it('should render the HomeRoute inside the MainLayout at the root path', () => {
+  it('should lazy-load the HomeRoute inside the MainLayout at the root path', async () => {
     renderAt('/');
 
     expect(
-      within(screen.getByTestId('main-layout')).getByTestId('home-route')
+      await within(await screen.findByTestId('main-layout')).findByTestId(
+        'home-route'
+      )
     ).toBeInTheDocument();
   });
 
-  it('should render the NotFoundRoute inside the MainLayout for an unknown path', () => {
+  it('should lazy-load the NotFoundRoute inside the MainLayout for an unknown path', async () => {
     renderAt('/missing');
 
     expect(
-      within(screen.getByTestId('main-layout')).getByTestId('not-found-route')
+      await within(await screen.findByTestId('main-layout')).findByTestId(
+        'not-found-route'
+      )
     ).toBeInTheDocument();
   });
 
-  it('should render the ErrorRoute inside the MainLayout when a screen throws', () => {
+  it('should render the ErrorRoute inside the MainLayout when a screen throws', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
     HomeRoute.mockImplementation(() => {
       throw new Error('Failed to render');
@@ -72,11 +80,13 @@ describe('App', () => {
     renderAt('/');
 
     expect(
-      within(screen.getByTestId('main-layout')).getByTestId('error-route')
+      await within(await screen.findByTestId('main-layout')).findByTestId(
+        'error-route'
+      )
     ).toBeInTheDocument();
   });
 
-  it('should render the ErrorLayout in place of the MainLayout when the layout throws', () => {
+  it('should render the ErrorLayout in place of the MainLayout when the layout throws', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
     MainLayout.mockImplementation(() => {
       throw new Error('Failed to render');
@@ -84,7 +94,7 @@ describe('App', () => {
 
     renderAt('/');
 
+    expect(await screen.findByTestId('error-layout')).toBeInTheDocument();
     expect(screen.queryByTestId('main-layout')).not.toBeInTheDocument();
-    expect(screen.getByTestId('error-layout')).toBeInTheDocument();
   });
 });
