@@ -17,7 +17,7 @@ test.describe('Lazy routes', () => {
     ).toBeVisible();
   });
 
-  test('should show the error screen when a screen chunk fails to load', async ({
+  test('should show the error screen inside the main layout when a screen chunk fails to load', async ({
     page,
   }) => {
     await page.route(/\/assets\/HomeRoute-[^/]+\.js$/, (route) =>
@@ -30,5 +30,8 @@ test.describe('Lazy routes', () => {
         .getByRole('main')
         .getByRole('heading', { name: 'Something went wrong' })
     ).toBeVisible();
+    // Only the main layout renders the header, so it proves the screen's error boundary caught the
+    // failure rather than the root error layout, which replaces the whole layout.
+    await expect(page.getByRole('banner')).toBeVisible();
   });
 });
