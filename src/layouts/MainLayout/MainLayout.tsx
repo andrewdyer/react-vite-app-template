@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router';
 
+import { MainTemplate } from '@/components/templates';
+
 const MainLayout = () => {
   return (
-    <main>
+    <MainTemplate>
       <Outlet />
-    </main>
+    </MainTemplate>
   );
 };
 

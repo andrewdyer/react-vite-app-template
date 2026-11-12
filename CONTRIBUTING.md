@@ -34,7 +34,7 @@ Prepare the project for local development after cloning the repository:
 
 A running development server confirms the environment is ready for local changes.
 
-> **Tip:** Run `pnpm start:storybook` to develop and preview pages and components in isolation.
+> **Tip:** Run `pnpm start:storybook` to develop and preview templates and components in isolation.
 
 ## Development Workflow
 
@@ -79,7 +79,7 @@ Write the change with the existing codebase in mind:
 
 - Keep changes limited to the branch's purpose, avoiding unrelated edits.
 - Match existing patterns and conventions already used nearby in the codebase.
-- Add or update Storybook stories alongside page and component changes.
+- Add or update Storybook stories alongside template and component changes.
 - Apply the formatting and linting expectations described in [Coding Standards](#coding-standards) while writing code.
 
 A focused, convention-following change is faster to review and less likely to introduce regressions.

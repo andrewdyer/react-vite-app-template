@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import { Outlet } from 'react-router';
 
-import { renderWithProviders } from '@/utils/testing';
+import { renderWithProviders } from '@/utilities/testing';
 
 import App from './App';
 
@@ -13,8 +13,8 @@ vi.mock('@/layouts', async () => ({
   ),
 }));
 
-vi.mock('@/pages', async () => ({
-  Home: () => <div data-testid="home-page">Home Page</div>,
+vi.mock('@/routes', async () => ({
+  HomeRoute: () => <div data-testid="home-route">Home Route</div>,
 }));
 
 describe('App', () => {
@@ -25,10 +25,10 @@ describe('App', () => {
     expect(mainLayout).toBeInTheDocument();
   });
 
-  it('should render the Home component when navigating to the root path', () => {
+  it('should render the HomeRoute component when navigating to the root path', () => {
     renderWithProviders(<App />, { initialEntries: ['/'] });
 
-    const Home = screen.getByTestId('home-page');
-    expect(Home).toBeInTheDocument();
+    const homeRoute = screen.getByTestId('home-route');
+    expect(homeRoute).toBeInTheDocument();
   });
 });

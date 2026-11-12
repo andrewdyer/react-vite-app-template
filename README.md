@@ -16,7 +16,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## App
 
-The repository follows a clear structure, keeping pages and layouts together with their tests and stories, alongside the end-to-end tests and the build, deployment and tooling configuration.
+The repository follows a clear structure, organising components by atomic design level and keeping routes, pages and templates in separate layers with their tests and stories, alongside the end-to-end tests and the build, deployment and tooling configuration.
 
 ```plaintext
 repo/
@@ -32,9 +32,12 @@ repo/
 ├── public/                    # Static assets copied into the build
 │
 ├── src/
-│   ├── layouts/               # Route layouts with tests
-│   ├── pages/                 # Route pages with tests and stories
-│   ├── utils/                 # Shared helpers, including test utilities
+│   ├── components/
+│   │   ├── pages/             # Screens that own data and business logic
+│   │   └── templates/         # Presentational screen layouts with stories
+│   ├── layouts/               # Route layouts that wrap routes in a template
+│   ├── routes/                # Routes that handle the URL and render pages
+│   ├── utilities/             # Shared helpers, including test utilities
 │   ├── App.tsx                # Application routes
 │   ├── main.tsx               # Application entry point
 │   └── setupTests.ts          # Vitest setup
@@ -51,11 +54,11 @@ repo/
 The app is built with Vite and TypeScript, providing a fast development experience and optimised production builds. Key features include:
 
 - [SWC (Speedy Web Compiler)](https://swc.rs/) for faster builds and development.
-- [React Router](https://reactrouter.com/) for client-side routing, with pages rendered inside shared layouts.
+- [React Router](https://reactrouter.com/) for client-side routing, with routes, pages and templates kept in separate layers and rendered inside shared layouts.
 - [Vite PWA](https://vite-pwa-org.netlify.app/) for a web app manifest and a service worker that caches the production build.
 - [Vitest](https://vitest.dev/) for unit and component testing, along with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing React components, [Vitest UI](https://vitest.dev/guide/ui.html), [jsdom](https://github.com/jsdom/jsdom) environment, and [V8 coverage reports](https://vitest.dev/guide/coverage.html) with enforced thresholds.
 - [Playwright](https://playwright.dev/) for cross-browser end-to-end and accessibility testing against the production build.
-- [Storybook](https://storybook.js.org/) for developing and documenting pages and components in isolation.
+- [Storybook](https://storybook.js.org/) for developing and documenting templates and components in isolation.
 - [ESLint](https://eslint.org/) for linting TypeScript, React and hooks usage, accessibility, import ordering, Storybook stories, and Playwright tests.
 - Pre-commit checks with [lint-staged](https://github.com/lint-staged/lint-staged) to maintain code quality.
 

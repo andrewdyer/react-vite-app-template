@@ -1,14 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Home from './Home';
+import HomeTemplate from './HomeTemplate';
 
 const meta = {
-  title: 'Pages/Home',
-  component: Home,
+  title: 'Templates/HomeTemplate',
+  component: HomeTemplate,
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof Home>;
+  args: {
+    title: 'React + Vite',
+  },
+} satisfies Meta<typeof HomeTemplate>;
 
 export default meta;
 
