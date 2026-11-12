@@ -28,7 +28,7 @@ Prepare the project for local development after cloning the repository:
 
 1. Clone the repository and navigate to its directory.
 2. Install the correct Node.js version and project dependencies — see [Dependency Management](#dependency-management).
-3. Start the development server with `pnpm start`.
+3. Start the development server with `pnpm dev`.
 
 > **Note:** Installing dependencies also sets up the Git hooks that format and lint staged files and validate commit messages.
 
@@ -108,7 +108,7 @@ Run the validation suite before submitting changes:
 - Re-run tests on file changes with `pnpm test:watch`.
 - Check test coverage with `pnpm test:coverage`.
 - Explore tests interactively with `pnpm test:ui`.
-- Check end-to-end behaviour with `pnpm test:e2e`, or explore it interactively with `pnpm test:e2e:ui`.
+- Check end-to-end behaviour with `pnpm e2e`, or explore it interactively with `pnpm e2e:ui`.
 
 > **Note:** Running the end-to-end tests builds and previews the app automatically. Install the Playwright browsers once with `pnpm exec playwright install` before the first run.
 
