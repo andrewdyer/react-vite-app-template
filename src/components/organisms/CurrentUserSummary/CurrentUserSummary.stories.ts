@@ -29,7 +29,7 @@ type Story = StoryObj<typeof meta>;
 export const SignedIn: Story = {
   args: {
     status: 'success',
-    user: { id: '1', name: 'Ada Lovelace', email: 'ada@example.com' },
+    user: { id: '1', name: 'John Doe', email: 'johndoe@example.com' },
   },
 };
 

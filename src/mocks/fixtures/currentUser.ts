@@ -5,6 +5,6 @@ import type { CurrentUser } from '@/services/currentUser';
  */
 export const currentUserFixture: CurrentUser = {
   id: '1',
-  name: 'Ada Lovelace',
-  email: 'ada@example.com',
+  name: 'John Doe',
+  email: 'johndoe@example.com',
 };

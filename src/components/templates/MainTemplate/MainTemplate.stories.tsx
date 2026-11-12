@@ -16,7 +16,7 @@ const meta = {
     children: <p>Page content</p>,
     currentUser: {
       status: 'success',
-      user: { id: '1', name: 'Ada Lovelace', email: 'ada@example.com' },
+      user: { id: '1', name: 'John Doe', email: 'johndoe@example.com' },
       onRetry: fn(),
     },
   },

@@ -6,8 +6,8 @@ import { expect, test } from '@playwright/test';
  */
 const currentUser = {
   id: '1',
-  name: 'Ada Lovelace',
-  email: 'ada@example.com',
+  name: 'John Doe',
+  email: 'johndoe@example.com',
 };
 
 // Requests from a page controlled by the PWA service worker can bypass page.route, so the routed
@@ -25,21 +25,21 @@ test.describe('Current user', () => {
     await page.goto('/');
 
     await expect(page.getByRole('banner')).toHaveText(
-      'Signed in as Ada Lovelace (ada@example.com)'
+      'Signed in as John Doe (johndoe@example.com)'
     );
   });
 
   test('should show the signed-in user on every screen', async ({ page }) => {
     await page.goto('/this-page-does-not-exist');
 
-    await expect(page.getByRole('banner')).toContainText('Ada Lovelace');
+    await expect(page.getByRole('banner')).toContainText('John Doe');
   });
 
   test('should have no detectable accessibility violations', async ({
     page,
   }) => {
     await page.goto('/');
-    await expect(page.getByRole('banner')).toContainText('Ada Lovelace');
+    await expect(page.getByRole('banner')).toContainText('John Doe');
 
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
@@ -67,6 +67,6 @@ test.describe('Current user with a failing API', () => {
     isApiFailing = false;
     await page.getByRole('button', { name: 'Try again' }).click();
 
-    await expect(page.getByRole('banner')).toContainText('Ada Lovelace');
+    await expect(page.getByRole('banner')).toContainText('John Doe');
   });
 });
