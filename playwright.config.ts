@@ -36,6 +36,7 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     env: {
       VITE_APP_NAME: 'React + Vite',
+      VITE_API_URL: 'http://localhost:4173/api',
     },
   },
 });

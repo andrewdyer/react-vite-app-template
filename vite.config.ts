@@ -2,12 +2,16 @@
 import path from 'path';
 
 import react from '@vitejs/plugin-react-swc';
+import { msw } from 'msw/vite';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
     react(),
+    // Serves the mock service worker script during development only. In worker-only mode the
+    // plugin would otherwise copy the script into every production build.
+    { ...msw({ mode: 'worker-only' }), apply: 'serve' },
     VitePWA({
       registerType: 'autoUpdate',
       workbox: {
@@ -60,6 +64,7 @@ export default defineConfig({
     setupFiles: './src/setupTests.ts',
     env: {
       VITE_APP_NAME: 'React + Vite',
+      VITE_API_URL: 'http://localhost:3000/api',
     },
     include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     coverage: {
@@ -81,6 +86,7 @@ export default defineConfig({
         'src/**/*.{test,spec}.{js,jsx,ts,tsx}',
         'src/**/*.stories.{ts,tsx}',
         'src/**/*.mock.{js,ts}',
+        'src/mocks/**',
         '**/{vite,eslint}.config.{js,ts}',
       ],
     },
