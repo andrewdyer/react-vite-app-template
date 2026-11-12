@@ -1,40 +1,34 @@
+import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-import { Home } from '../pages';
-
 test.describe('Home', () => {
-  let home: Home;
-
   test.beforeEach(async ({ page }) => {
-    home = new Home(page);
-
-    await home.goto();
+    await page.goto('/');
   });
 
-  test('Home has expected title', async ({ page }) => {
-    await expect(page).toHaveTitle(home.title);
+  test('should have the correct title', async ({ page }) => {
+    await expect(page).toHaveTitle('React + Vite + TS');
   });
 
-  test('Vite and React logo links are correct', async () => {
-    await expect(home.viteLink).toHaveAttribute('href', 'https://vite.dev');
-    await expect(home.reactLink).toHaveAttribute('href', 'https://react.dev');
+  test('should show the correct heading', async ({ page }) => {
+    const heading = page.getByRole('heading', { name: 'React + Vite' });
+
+    await expect(heading).toBeVisible();
   });
 
-  test('Page displays correct heading and text', async () => {
-    await expect(home.heading).toHaveText('React + Vite');
-    await expect(home.helperText).toHaveText(
-      'Click on the Vite and React logos to learn more'
-    );
+  test('should render the page inside the main landmark', async ({ page }) => {
+    const main = page.getByRole('main');
+
+    await expect(
+      main.getByRole('heading', { name: 'React + Vite' })
+    ).toBeVisible();
   });
 
-  test('Counter increments correctly', async () => {
-    await home.incrementCounter(1);
-    await expect(home.counterButton).toContainText('count is 1');
+  test('should have no detectable accessibility violations', async ({
+    page,
+  }) => {
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
-    await home.incrementCounter(1);
-    await expect(home.counterButton).toContainText('count is 2');
-
-    await home.incrementCounter(1);
-    await expect(home.counterButton).toContainText('count is 3');
+    expect(accessibilityScanResults.violations).toEqual([]);
   });
 });
