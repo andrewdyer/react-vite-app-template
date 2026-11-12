@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { MemoryRouter } from 'react-router';
 
 const withMemoryRouter = (Story: React.ComponentType) => {
