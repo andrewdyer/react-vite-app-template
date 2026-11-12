@@ -1,4 +1,4 @@
 pnpm lint && \
 pnpm format && \
-pnpm type-check && \
+pnpm typecheck && \
 pnpm test:coverage

@@ -1,0 +1,49 @@
+name: Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to roll back to (e.g. "1.2.3")
+        required: true
+        type: string
+
+run-name: 'v${{ inputs.version }}'
+
+permissions:
+  contents: read
+
+jobs:
+  rollback:
+    name: Rollback
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Validate rollback input
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          if [[ -z "$VERSION" ]]; then
+            echo "❌ Missing rollback input (version)"
+            exit 1
+          fi
+
+      - name: Rollback target
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          REPOSITORY=$(echo "$GITHUB_REPOSITORY" | tr '[:upper:]' '[:lower:]')
+          IMAGE="ghcr.io/${REPOSITORY}"
+
+          echo "⏪ Rolling back to $IMAGE:$VERSION..."
+
+          # TODO: add your rollback logic here.
+          # At this point the following variables are available:
+          #   IMAGE   — the GHCR image name
+          #   VERSION — the version to roll back to (e.g. "1.2.3")
+          echo "❌ Rollback logic not yet implemented"
+          exit 1

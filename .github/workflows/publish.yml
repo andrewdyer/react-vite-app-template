@@ -1,0 +1,99 @@
+name: Publish
+
+on:
+  push:
+    tags: ['v*']
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://npm.pkg.github.com
+          scope: '@${{ github.repository_owner }}'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN || github.token }}
+
+      - name: Verify tag matches app version
+        id: release
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+
+          if [[ "$TAG" != "v$VERSION" ]]; then
+            echo "❌ Tag $TAG does not match package.json version $VERSION"
+            exit 1
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Run typecheck
+        run: pnpm run typecheck
+
+      - name: Run unit tests
+        run: pnpm test
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push app image
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN || github.token }}
+        run: |
+          REPOSITORY=$(echo "$GITHUB_REPOSITORY" | tr '[:upper:]' '[:lower:]')
+          IMAGE="ghcr.io/${REPOSITORY}"
+
+          echo "🐳 Building and pushing $IMAGE:$VERSION..."
+
+          TOKEN_FILE=$(mktemp)
+          trap 'rm -f "$TOKEN_FILE"' EXIT
+          printf '%s' "$NODE_AUTH_TOKEN" > "$TOKEN_FILE"
+
+          docker build \
+            --secret id=npm_token,src="$TOKEN_FILE" \
+            -f Dockerfile \
+            -t "$IMAGE:$VERSION" \
+            -t "$IMAGE:latest" \
+            .
+
+          docker push "$IMAGE:$VERSION"
+          docker push "$IMAGE:latest"
+
+          echo "🚀 Dispatching deploy event for $VERSION..."
+
+          curl --fail --show-error \
+            -X POST \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/dispatches" \
+            -d "{\"event_type\":\"deploy\",\"client_payload\":{\"version\":\"$VERSION\"}}"
